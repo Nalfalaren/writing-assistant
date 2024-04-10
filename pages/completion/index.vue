@@ -1,7 +1,7 @@
 <template>
     <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : ''">
         <homepage-navigation_bar/>
-        <homepage-grammar/>
+        <homepage-text_completion/>
     </div>
 </template>
 <script setup lang="js">
