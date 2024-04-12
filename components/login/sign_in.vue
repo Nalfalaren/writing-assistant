@@ -16,7 +16,7 @@
           </p>
         </div>
         <div>
-          <UForm class="space-y-4 mt-8" @submit="$router.push('/')">
+          <UForm class="space-y-4 mt-8" @submit="$router.push('/home')">
             <UFormGroup label="Username" name="user_name" size="xl">
               <UInput
                 placeholder="Type the username here..."
@@ -47,15 +47,20 @@
               @click="loading"
               >Login</UButton
             >
+            <UButton
+              class="bg-[#0A2FB6] py-4 text-xl w-full flex justify-center hover:bg-blue-500"
+              ><ULink :to="googleLoginUrl">Login by Google</ULink></UButton
+            >
           </UForm>
           <hr class="mb-4 mx-auto w-1/2" />
           <div class="flex flex-row items-center gap-[5px] justify-center">
             <p class="text-[#8E8E8E]">Don't have account?</p>
             <ULink to="/sign-up">Register</ULink>
           </div>
+          
         </div>
       </UCard>
-      <div class="w-full h-full relative">
+      <div class="w-full h-full relative xl:block hidden">
         <div>
           <nuxt-img
             src="../public/login_img.png"
@@ -68,11 +73,24 @@
 </template>
 <script setup lang="js">
 import { userStore } from '~/store/userStore';
+import getConfigObject from '~/env/config';
 useSeoMeta({
   title: 'Login page',
   description: 'This is the login page of Correctly',
   ogTitle: 'Login page',
   ogDescription: 'This is the login page of Correctly'
 })
+
+const data = {
+  root: 'https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount',
+  client_id: getConfigObject('DEV').CLIENT_ID,
+  url: getConfigObject('DEV').REDIRECT_URI,
+  status: getConfigObject('DEV').ACCESS_TYPE,
+  respond_type: getConfigObject('DEV').RESPONSE_TYPE,
+  scope: getConfigObject('DEV').SCOPE,
+  prompts: getConfigObject('DEV').PROMPT,
+}
+const googleLoginUrl = `${data.root}?client_id=${data.client_id}&response_type=${data.respond_type}&access_type=${encodeURIComponent(data.status)}&redirect_uri=${encodeURIComponent(data.url)}&prompt=${encodeURIComponent(data.prompts)}&scope=${encodeURIComponent(data.scope)}&service=lso&o2v=2&theme=mn&ddm=0&flowName=GeneralOAuthFlow`;
+
 const userInfo = userStore();
 </script>

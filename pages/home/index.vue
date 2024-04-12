@@ -7,4 +7,10 @@
 <script setup lang="js">
 import { useScreen } from '~/store/userHome.js';
 const screen = useScreen();
+useSeoMeta({
+    title: 'Correctly homepage',
+    ogTitle: 'Correctly homepage',
+    description: 'Correctly is the web for checking paragraph',
+    ogDescription: 'Correctly is the web for checking paragraph',
+})
 </script>

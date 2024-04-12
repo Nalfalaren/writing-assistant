@@ -20,7 +20,11 @@
         <div>
           <UForm class="space-y-4 mt-8" @submit="$router.push('/login')">
             <UFormGroup label="Email address" name="user_address" size="2xl">
-              <UInput placeholder="Type the email here..." size="xl" v-model="userRegister.userRegister.gmail"></UInput>
+              <UInput
+                placeholder="Type the email here..."
+                size="xl"
+                v-model="userRegister.userRegister.gmail"
+              ></UInput>
             </UFormGroup>
             <UFormGroup label="Username" name="user_name" size="2xl">
               <UInput
@@ -30,11 +34,23 @@
               ></UInput>
             </UFormGroup>
             <UFormGroup label="Password" name="password" size="2xl">
-              <UInput placeholder="Type the password here..." size="xl" />
+              <UInput
+                placeholder="Type the password here..."
+                size="xl"
+                :type="home.eyesMode === 'close' ? 'password' : 'text'"
+                v-model="userRegister.userRegister.password"
+              />
               <UIcon
+                v-if="home.eyesMode === 'open'"
                 name="i-heroicons-eye"
                 class="absolute top-3 right-2"
-                v-model="userRegister.userRegister.password"
+                @click="home.handleEyeMode('close')"
+              ></UIcon>
+              <UIcon
+                v-else
+                name="i-heroicons-eye-slash"
+                class="absolute top-3 right-2"
+                @click="home.handleEyeMode('open')"
               ></UIcon>
             </UFormGroup>
             <div
@@ -56,7 +72,7 @@
           </div>
         </div>
       </UCard>
-      <div class="w-full h-full relative">
+      <div class="w-full h-full relative xl:block hidden">
         <div>
           <nuxt-img
             src="../public/login_img.png"
@@ -69,8 +85,9 @@
 </template>
 <script setup lang="js">
 import { userRegisterStore } from '~/store/userRegister.js'
-
+import { useScreen } from '~/store/userHome.js'
 const userRegister = userRegisterStore();
+const home = useScreen();
 </script>
 <style lang="">
 </style>
