@@ -5,9 +5,13 @@ const developer = {
     SCOPE: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
     ACCESS_TYPE: 'offline',
     PROMPT: 'consent',
+    SERVICE: 'lso',
+    O2V: 2,
+    THEME: 'mn',
+    DDM: 0,
+    FLOWNAME: 'GeneralOAuthFlow',
     PORT: 6868
 }
-
 const production = {
 
 }

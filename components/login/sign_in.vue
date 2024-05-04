@@ -48,8 +48,11 @@
               >Login</UButton
             >
             <UButton
-              class="bg-[#0A2FB6] py-4 text-xl w-full flex justify-center hover:bg-blue-500"
-              ><ULink :to="googleLoginUrl">Login by Google</ULink></UButton
+              class="bg-[#0A2FB6] py-4 text-xl w-full flex justify-center bg-white text-[#8E8E8E] hover:text-white border border-2 border-solid border-[#8E8E8E] hover:bg-blue-600"
+              >
+              <div class="w-[30px] h-[30px]"><NuxtImg src="../public/google.png" class="w-full h-full object-cover"></NuxtImg></div>
+              <ULink :to="googleLoginUrl">Login by Google</ULink>
+              </UButton
             >
           </UForm>
           <hr class="mb-4 mx-auto w-1/2" />
@@ -89,8 +92,13 @@ const data = {
   respond_type: getConfigObject('DEV').RESPONSE_TYPE,
   scope: getConfigObject('DEV').SCOPE,
   prompts: getConfigObject('DEV').PROMPT,
+  service: getConfigObject('DEV').SERVICE,
+  o2v: getConfigObject('DEV').O2V,
+  theme: getConfigObject('DEV').THEME,
+  ddm: getConfigObject('DEV').DDM,
+  authFlow: getConfigObject('DEV').FLOWNAME,
 }
-const googleLoginUrl = `${data.root}?client_id=${data.client_id}&response_type=${data.respond_type}&access_type=${encodeURIComponent(data.status)}&redirect_uri=${encodeURIComponent(data.url)}&prompt=${encodeURIComponent(data.prompts)}&scope=${encodeURIComponent(data.scope)}&service=lso&o2v=2&theme=mn&ddm=0&flowName=GeneralOAuthFlow`;
-
+const googleLoginUrl = `${data.root}?client_id=${data.client_id}&response_type=${data.respond_type}&access_type=${encodeURIComponent(data.status)}&redirect_uri=${encodeURIComponent(data.url)}&prompt=${encodeURIComponent(data.prompts)}&scope=${encodeURIComponent(data.scope)}&service=${data.service}&o2v=${data.o2v}&theme=${data.theme}&ddm=${data.o2v}&flowName=${data.authFlow}`;
 const userInfo = userStore();
+
 </script>
