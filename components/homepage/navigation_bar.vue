@@ -2,18 +2,30 @@
   <div>
     <nav>
       <UCard
-        :class="screen.screenMode === 'dark' ? 'bg-slate-800 sticky' : 'sticky border border-1 border-solid border-slate-500'"
+        :class="
+          screen.screenMode === 'dark'
+            ? 'bg-slate-800 sticky'
+            : 'sticky border border-1 border-solid border-slate-500'
+        "
       >
         <div class="flex flex-row justify-between items-center px-4">
           <div class="flex flex-row items-center gap-[20px]">
             <h1 class="text-3xl text-[#0A2FB6] font-bold">Correctly</h1>
-            <UToolTip text="Click on here to expand!">
-              <UIcon :name="screen.isToggle ? 'i-heroicons-chevron-double-left-16-solid' : 'i-heroicons-chevron-double-right-16-solid'" :class="
+            <UTooltip text="Click on here to expand and narrow!">
+              <UIcon
+                :name="
+                  screen.isToggle
+                    ? 'i-heroicons-chevron-double-left-16-solid'
+                    : 'i-heroicons-chevron-double-right-16-solid'
+                "
+                :class="
                   screen.screenMode === 'dark'
                     ? 'w-[30px] h-[30px] text-white hover:bg-green-900 mt-[10px]'
                     : 'w-[30px] h-[30px] hover:bg-green-900 mt-[10px]'
-                " @click="screen.handleToggle()"></UIcon>
-            </UToolTip>
+                "
+                @click="screen.handleToggle()"
+              ></UIcon>
+            </UTooltip>
           </div>
           <div>
             <h1
@@ -65,12 +77,14 @@
                 ></UIcon>
               </div>
             </UTooltip>
-            <div><h1 class="text-emerald-500 font-bold">{{ successMessage }}</h1></div>
+            <div>
+              <h1 class="text-emerald-500 font-bold">{{ successMessage }}</h1>
+            </div>
           </div>
         </div>
       </UCard>
     </nav>
-    <USlideover v-model="isOpen" prevent-close>
+    <!-- <USlideover v-model="isOpen" prevent-close>
       <UCard
         class="flex flex-col flex-1"
         :ui="{
@@ -114,7 +128,7 @@
 
         <Placeholder class="h-full" />
       </UCard>
-    </USlideover>
+    </USlideover> -->
   </div>
 </template>
 
