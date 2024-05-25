@@ -10,7 +10,7 @@
       >
         <div class="flex flex-row justify-between items-center px-4">
           <div class="flex flex-row items-center gap-[20px]">
-            <h1 class="text-3xl text-[#0A2FB6] font-bold">Correctly</h1>
+            <h1 class="text-3xl text-[#0A2FB6] font-bold" @click="$router.push('/home')">Correctly</h1>
             <UTooltip text="Click on here to expand and narrow!">
               <UIcon
                 :name="

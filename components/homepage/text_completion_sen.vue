@@ -12,7 +12,6 @@
                   class="w-full h-full p-4 outline-none"
                   v-model="rawText"
                 ></textarea>
-                <div>{{ paragraph.body }}</div>
                 <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2">Submit</UButton>
               </form>
             </div>
@@ -25,11 +24,13 @@
   
   <script setup lang="js">
   import { ref } from 'vue';
-  import getParaphrase from '~/composables/getParaphrase.js'
+  import getTextCompletion from '~/composables/GetTextCompletion';
+  
+  
   let rawText = '';
   let paragraph = ref('');
   const handleSubmit = async () => {
-   paragraph.value = await getParaphrase("shorten", rawText); 
+    paragraph.value = await getTextCompletion(rawText, "paragraph");
   };
   
   </script>

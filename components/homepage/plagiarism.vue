@@ -23,8 +23,6 @@
 </template>
 
 <script setup lang="js">
-import { ref } from 'vue';
-import getParaphrase from '~/composables/getParaphrase';
 
 
 let rawText = '';

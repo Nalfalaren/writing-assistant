@@ -24,12 +24,13 @@
 
 <script setup lang="js">
 import { ref } from 'vue';
-import getParaphrase from '~/composables/getParaphrase.js';
+import getTextCompletion from '~/composables/GetTextCompletion.js';
 
 
 let rawText = '';
+let paragraph = ref('');
 const handleSubmit = async () => {
-  await getParaphrase("expand", rawText); 
+  paragraph.value = await getTextCompletion(rawText, "paragraph");
 };
 
 </script>

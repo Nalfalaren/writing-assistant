@@ -26,10 +26,9 @@
   <script setup lang="js">
   import { ref } from 'vue';
   import getParaphrase from '~/composables/getParaphrase.js'
-
   let rawText = '';
   let paragraph = ref('');
-  let message = ref('');
+
   const handleSubmit = async () => {
    paragraph.value = await getParaphrase("expand", rawText); 
   };

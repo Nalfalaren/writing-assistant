@@ -18,7 +18,6 @@
         <hr class="w-full mt-[40px]" />
         <div class="flex flex-col gap-[20px]">
           <h1 class="text-xl font-bold py-4">Pages</h1>
-          <!-- Render page items -->
           <div
             v-for="(page, index) in pages"
             :key="index"

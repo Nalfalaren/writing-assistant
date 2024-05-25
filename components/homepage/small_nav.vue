@@ -28,26 +28,29 @@
 
 
 <script setup lang="js">
+const route = useRoute();
+const id = route.params.id;
+console.log(route.params.id);
 const links = [{
   label: 'Grammar',
   icon: 'i-heroicons-sparkles-solid',
-  to: '/grammar',
 }, {
   label: 'Paraphrase',
   icon: 'i-heroicons-arrow-path-rounded-square-solid',
-  to: '/paraphrase',
   submenu: [
-    { label: 'Expand', to: '/paraphrase/expand' },
-    { label: 'Shorten', to: '/paraphrase/shorten' },
+    { label: 'Expand', to: `/home/${id}/paraphrase/expand` },
+    { label: 'Shorten', to: `/home/${id}/paraphrase/shorten` },
   ]
 }, {
   label: 'Plagiarism',
   icon: 'i-heroicons-document-check-16-solid',
-  to: '/plagiarism'
 }, {
   label: 'Text completion',
   icon: 'i-heroicons-paint-brush-20-solid',
-  to: '/text-completion'
+  submenu: [
+    { label: 'Paragraph', to: `/home/${id}/text-completion/paragraph` },
+    { label: 'Sentence', to: `/home/${id}/text-completion/sentence` },
+  ]
 }]
 </script>
 
