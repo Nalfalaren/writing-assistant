@@ -1,30 +1,39 @@
 <template>
-   <div>
-    <UContainer>
-      <UCard class="mt-[50px]">
-        <div >
-          <div class="relative">
-            <textarea
-              color="white"
-              variant="outline"
-              placeholder="Type something here..."
-              class="w-full h-[400px] border border-2 border-solid border-gray-500 p-4"
-            ></textarea>
-            <UButton variant="outline"  class="text-2xl text-white font-bold bg-green-700 absolute bottom-5 right-5 hover:bg-green-900 p-4 rounded-[10px]">Paraphrase</UButton>
+  <div>
+    <UContainer class="">
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3">
+        <div class="">
+          <div class="relative aspect-video w-[1400px] h-[800px]">
+            <form @submit.prevent="handleSubmit" @keydown.enter.prevent="handleSubmit">
+              <textarea
+                color="white"
+                variant="outline"
+                placeholder="Type something here..."
+                class="w-full h-full p-4 outline-none"
+                v-model="rawText"
+              ></textarea>
+              <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2">Submit</UButton>
+            </form>
           </div>
-          <div>
-            <textarea
-              color="white"
-              variant="outline"
-              class="w-full h-[400px] border border-2 border-solid border-gray-500 p-4"
-              disabled
-            ></textarea>
-          </div>
+          <homepage-small_nav/>
         </div>
-      </UCard>
+      </div>
     </UContainer>
   </div>
 </template>
-<script setup lang="ts">
+
+<script setup lang="js">
+import { ref } from 'vue';
+import getParaphrase from '~/composables/getParaphrase';
+
+
+let rawText = '';
+const handleSubmit = async () => {
+  // await get(rawText); 
+};
 
 </script>
+
+<style lang="">
+
+</style>

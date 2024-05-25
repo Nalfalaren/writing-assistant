@@ -60,7 +60,7 @@ const pages = reactive([{ id: 1, name: 'Get started' }]);
 
 const navPage = (id) => {
   screen.handleComponent('started');
-  router.push(`/${id}`);
+  router.push(`/home/${id}`);
 };
 
 const addNewPage = computed(() => {
