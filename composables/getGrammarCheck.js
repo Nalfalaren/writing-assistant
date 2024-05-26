@@ -1,22 +1,19 @@
+import successMessage from "~/components/alert/SuccessAlert";
+import failAlert from "~/components/alert/FailAlert";
 const getGrammarCheck = async (params) => {
-    console.log(params);
-
-    // const queryString = new URLSearchParams({ paragraph: params }).toString();
     const url = `http://localhost:8686/api/assistant/grammar-checker`;
-    console.log(url);
     const response = await fetch(url, {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: {"paragraph" : `${params}`}
+        body: JSON.stringify({ paragraph: params }),
     });
 
     if (response.ok) {
         const data = await response.json();
-        console.log(data);
         return data;
-    } else if (response.status === 403) { 
+    } else if (response.status === 403) {
         const error = await response.json();
         return error;
     }

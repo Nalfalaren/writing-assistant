@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-const successMessage = (message) => {
+const failAlert = (title) => {
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -12,9 +12,9 @@ const successMessage = (message) => {
         }
       });
       Toast.fire({
-        icon: "success",
-        title: message,
+        icon: "error",
+        title: title
       });
 }
 
-export default successMessage
+export default failAlert;

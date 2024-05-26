@@ -1,8 +1,8 @@
 <template>
-  <div class="ml-72">
+  <div>
     <UHorizontalNavigation
       :links="links"
-      class="border-b border-[#c1b6fc] dark:border-[#5424b3] absolute top-0 mt-[-100px] w-1/2 bg-[#f4f3ff] rounded-[20px] flex flex-row justify-center items-center gap-[20px]"
+      class="border-b border-[#c1b6fc] dark:border-[#5424b3] absolute top-0 left-[26%] mt-[-100px] w-1/2 bg-[#f4f3ff] rounded-[20px] flex flex-row justify-center items-center gap-[20px]"
     >
       <template #default="{ link }">
         <div class="relative group">
@@ -30,10 +30,10 @@
 <script setup lang="js">
 const route = useRoute();
 const id = route.params.id;
-console.log(route.params.id);
 const links = [{
   label: 'Grammar',
   icon: 'i-heroicons-sparkles-solid',
+  to: `/home/${id}/grammar`
 }, {
   label: 'Paraphrase',
   icon: 'i-heroicons-arrow-path-rounded-square-solid',

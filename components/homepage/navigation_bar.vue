@@ -77,9 +77,6 @@
                 ></UIcon>
               </div>
             </UTooltip>
-            <div>
-              <h1 class="text-emerald-500 font-bold">{{ successMessage }}</h1>
-            </div>
           </div>
         </div>
       </UCard>
@@ -135,20 +132,17 @@
 <script setup lang="js">
 import { ref } from 'vue';
 import { useScreen } from '~/store/userHome.js';
+import successMessage from '../alert/SuccessAlert.js';
 const isOpen = ref(false);
 const isExpand = ref(false);
 const router = useRouter();
-const successMessage = ref('');
 const errorURL = router.currentRoute.value.query.error;
 const code = router.currentRoute.value.query.code;
 if(errorURL){
   router.push('/login');
 }
 else if(code){
-  successMessage.value = 'Đăng nhập thành công!'
-  setTimeout(() => {
-    successMessage.value = ''
-  }, 3000)
+  successMessage('Login successfully')
 }
 const screen = useScreen();
 

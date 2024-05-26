@@ -9,7 +9,7 @@
                 color="white"
                 variant="outline"
                 placeholder="Type something here..."
-                class="w-full h-full p-4 outline-none"
+                class="w-full h-full p-4 outline-none text-2xl"
                 v-model="rawText"
               ></textarea>
               <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2">Submit</UButton>

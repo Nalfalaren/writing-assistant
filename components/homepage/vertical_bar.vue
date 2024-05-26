@@ -52,6 +52,7 @@
 import { useScreen } from '~/store/userHome';
 import { useRouter } from 'vue-router';
 import { reactive } from 'vue';
+import successMessage from '../alert/SuccessAlert';
 
 const screen = useScreen();
 const router = useRouter();
@@ -65,6 +66,7 @@ const navPage = (id) => {
 const addNewPage = computed(() => {
   const newPageId = pages.length + 1;
   pages.push({ id: newPageId, name: `Page ${newPageId}` });
+  successMessage("Add page successfully!")
 });
 
 const deletePage = (id) => {
@@ -72,6 +74,7 @@ const deletePage = (id) => {
     pages.findIndex((page) => page.id === id),
     1
   );
+  successMessage("Delete successfully!")
 };
 </script>
 
