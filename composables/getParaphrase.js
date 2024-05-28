@@ -1,7 +1,6 @@
 import SuccessAlert from '@/components/alert/SuccessAlert.js'
 import failAlert from '~/components/alert/FailAlert.js';
-const getParaphrase = async (type, params) => {
-    console.log({"form": `${type}`, "paragraph": `${params}`});
+const getParaphrase = async (params) => {
     console.log(params);
     const url = `http://localhost:8686/api/assistant/paraphrase`;
     console.log(url);
@@ -11,8 +10,7 @@ const getParaphrase = async (type, params) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            form: type,
-            paragraph: params,
+            text: params,
           }),
     });
 

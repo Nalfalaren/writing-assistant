@@ -138,11 +138,19 @@ const isExpand = ref(false);
 const router = useRouter();
 const errorURL = router.currentRoute.value.query.error;
 const code = router.currentRoute.value.query.code;
+const getToken = async () => {
+  const data = await getAccessToken(code);
+  console.log(data);
+  localStorage.setItem('accessToken', data.access_token);
+  localStorage.setItem('refreshToken', data.refresh_token);
+  localStorage.setItem('client_id', data.client_id);
+}
 if(errorURL){
   router.push('/login');
 }
 else if(code){
-  successMessage('Login successfully')
+  getToken();
+  successMessage('Login successfully');
 }
 const screen = useScreen();
 

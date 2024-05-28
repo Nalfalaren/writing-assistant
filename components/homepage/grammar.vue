@@ -85,6 +85,7 @@ const handleSubmit = async () => {
   isLoading.value = 'loading';
   try {
     const result = await getGrammarCheck(rawText.value);
+    console.log(result);
     if (result && result.body && result.body.errorWords) {
       data.value = result;
       isLoading.value = 'success';

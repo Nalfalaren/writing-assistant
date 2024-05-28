@@ -33,7 +33,7 @@
   const handleSubmit = async () => {
     try{
       isLoading.value = 'loading',
-      paragraph.value = await getParaphrase("expand", rawText);
+      paragraph.value = await getParaphrase(rawText);
       if(await paragraph.value.body){
         isLoading.value = 'success';
       } 

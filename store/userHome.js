@@ -5,6 +5,7 @@ export const useScreen = defineStore('screen', () => {
  const eyesMode = ref('close');
  const isClicked = ref('');
  const isToggle = ref(true);
+ const isFunctionClicked = ref('');
  const changeScreenMode = (value) => {
     screenMode.value = value;
     console.log(screenMode.value);
@@ -22,5 +23,7 @@ const handleComponent = (data) => {
 const handleToggle = () => {
    isToggle.value = !isToggle.value;
 }
- return { screenMode, eyesMode, changeScreenMode, handleEyeMode, isClicked, handleComponent, isToggle, handleToggle };
+
+
+ return { screenMode, eyesMode, changeScreenMode, handleEyeMode, isClicked, handleComponent, isToggle, handleToggle, isFunctionClicked };
 });

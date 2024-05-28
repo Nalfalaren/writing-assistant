@@ -5,43 +5,40 @@
         class="border border-1 border-solid border-slate-500 w-[20%] h-screen pt-2"
         v-if="screen.isToggle"
       >
-        <div
-          class="flex flex-row flex-start items-center p-2 gap-[20px] hover:bg-[#E5E5E5] hover:rounded-[20px]"
-          @click="addNewPage"
-        >
-          <UIcon
-            name="i-heroicons-plus-16-solid"
-            class="w-[30px] h-[30px]"
-          ></UIcon>
-          <h1 class="text-xl font-bold">New</h1>
-        </div>
-        <hr class="w-full mt-[40px]" />
-        <div class="flex flex-col gap-[20px]">
-          <h1 class="text-xl font-bold py-4">Pages</h1>
-          <div
-            v-for="(page, index) in pages"
-            :key="index"
-            class="flex flex-row justify-between items-center gap-[10px] hover:bg-[#E5E5E5] hover:rounded-[20px] p-2"
-            :class="{ 'bg-[#E5E5E5] rounded-[20px]': screen.isClicked === page.id }"
-            @click="() => navPage(page.id)"
-          >
-          <div class="flex flex-row items-center gap-[10px]">
-            <UIcon
-              name="i-heroicons-clipboard-document-20-solid"
-              class="w-[30px] h-[30px]"
-            ></UIcon>
-            <h1 class="text-xl font-bold">{{ page.name }}</h1>
+        <div class="flex flex-col justify-between p-8">
+          <div class="flex flex-col gap-[10px] text-2xl">
+            <h1>Welcome {}</h1>
+            <div
+              class="flex flex-row items-center gap-[20px] text-2xl hover:font-semibold hover:bg-[#D9D9D9] p-4 hover:rounded-[10px] cursor-pointer"
+              @click="() => handleClickFunction('dashboard')"
+              :class="screen.isFunctionClicked === 'dashboard' ? 'bg-[#D9D9D9] rounded-[10px]' : ''"
+            >
+              <UIcon name="i-heroicons-presentation-chart-bar-20-solid"></UIcon>
+              <h1>User dashboard</h1>
             </div>
-            <div><UIcon name="i-heroicons-trash-16-solid" class="w-[20px] h-[20px]" @click.stop="deletePage(page.id)"></UIcon></div>
+
+            <div
+              class="flex flex-row items-center gap-[20px] text-2xl hover:font-semibold hover:bg-[#D9D9D9] p-4 hover:rounded-[10px] cursor-pointer"
+              @click="
+               () => handleClickFunction('function')
+              "
+              :class="
+                screen.isFunctionClicked === 'function' ? 'bg-[#D9D9D9] rounded-[10px]' : ''
+              "
+            >
+              <UIcon name="i-heroicons-cube-16-solid"></UIcon>
+              <h1>Functions</h1>
+            </div>
+
+            <div
+              class="flex flex-row items-center gap-[20px] text-2xl hover:font-semibold hover:bg-[#D9D9D9] p-4 hover:rounded-[10px]"
+            >
+              <UIcon
+                name="i-heroicons-arrow-left-start-on-rectangle-16-solid"
+              ></UIcon>
+              <h1>Log out</h1>
+            </div>
           </div>
-        </div>
-      </UCard>
-      <UCard class="w-[5%] h-screen" v-else>
-        <div>
-          <UIcon
-            name="i-heroicons-plus-16-solid"
-            class="w-[30px] h-[30px]"
-          ></UIcon>
         </div>
       </UCard>
     </transition>
@@ -56,26 +53,17 @@ import successMessage from '../alert/SuccessAlert';
 
 const screen = useScreen();
 const router = useRouter();
-const pages = reactive([{ id: 1, name: 'Get started' }]);
 
-const navPage = (id) => {
-  screen.handleComponent('started');
-  router.push(`/home/${id}`);
-};
+const handleClickFunction = (name) => {
+  screen.isFunctionClicked = name;
+  if(screen.isFunctionClicked === 'dashboard'){
+    router.push('/home/dashboard');
+  }
+  else if(screen.isFunctionClicked === 'function'){
+    router.push('/home');
+  }
+ };
 
-const addNewPage = computed(() => {
-  const newPageId = pages.length + 1;
-  pages.push({ id: newPageId, name: `Page ${newPageId}` });
-  successMessage("Add page successfully!")
-});
-
-const deletePage = (id) => {
-  pages.splice(
-    pages.findIndex((page) => page.id === id),
-    1
-  );
-  successMessage("Delete successfully!")
-};
 </script>
 
 <style lang="css">

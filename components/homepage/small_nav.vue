@@ -28,19 +28,14 @@
 
 
 <script setup lang="js">
-const route = useRoute();
-const id = route.params.id;
 const links = [{
   label: 'Grammar',
   icon: 'i-heroicons-sparkles-solid',
-  to: `/home/${id}/grammar`
+  to: `/home/grammar`
 }, {
   label: 'Paraphrase',
   icon: 'i-heroicons-arrow-path-rounded-square-solid',
-  submenu: [
-    { label: 'Expand', to: `/home/${id}/paraphrase/expand` },
-    { label: 'Shorten', to: `/home/${id}/paraphrase/shorten` },
-  ]
+  to: '/home/paraphrase'
 }, {
   label: 'Plagiarism',
   icon: 'i-heroicons-document-check-16-solid',
@@ -48,8 +43,8 @@ const links = [{
   label: 'Text completion',
   icon: 'i-heroicons-paint-brush-20-solid',
   submenu: [
-    { label: 'Paragraph', to: `/home/${id}/text-completion/paragraph` },
-    { label: 'Sentence', to: `/home/${id}/text-completion/sentence` },
+    { label: 'Paragraph', to: `/home/text-completion/paragraph` },
+    { label: 'Sentence', to: `/home/text-completion/sentence` },
   ]
 }]
 </script>

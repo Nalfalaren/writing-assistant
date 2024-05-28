@@ -7,7 +7,7 @@ const getGrammarCheck = async (params) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ paragraph: params }),
+        body: JSON.stringify({ text: params }),
     });
 
     if (response.ok) {
