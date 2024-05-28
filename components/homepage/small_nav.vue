@@ -39,6 +39,7 @@ const links = [{
 }, {
   label: 'Plagiarism',
   icon: 'i-heroicons-document-check-16-solid',
+  to: '/home/plagiarism'
 }, {
   label: 'Text completion',
   icon: 'i-heroicons-paint-brush-20-solid',
@@ -46,7 +47,7 @@ const links = [{
     { label: 'Paragraph', to: `/home/text-completion/paragraph` },
     { label: 'Sentence', to: `/home/text-completion/sentence` },
   ]
-}]
+},]
 </script>
 
 <style lang="">

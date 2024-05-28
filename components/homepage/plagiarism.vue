@@ -12,6 +12,12 @@
                 class="w-full h-full p-4 outline-none text-2xl"
                 v-model="rawText"
               ></textarea>
+              <div v-show="isLoading === 'loading'"><img src="~/public/loading.gif" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" alt="loading"></div>
+              <div v-show="isLoading === 'pending'">
+                <template>
+  <UMeter :value="35" indicator label="Plagiarism rate"/>
+</template>
+              </div>
               <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2">Submit</UButton>
             </form>
           </div>
@@ -25,11 +31,26 @@
 <script setup lang="js">
 
 
-let rawText = '';
+let rawText = ref('');
+const plagiarism = ref({});
+const isLoading = ref('pending')
 const handleSubmit = async () => {
-  // await get(rawText); 
-};
-
+    try{
+      isLoading.value = 'loading',
+      plagiarism.value = await getPlagiarism(rawText.value);
+      if(await plagiarism.value.body){
+        isLoading.value = 'success';
+      } 
+    }
+    catch(error){
+      console.log(error);
+    }
+    finally{
+      if(isLoading.value !== 'success'){
+        isLoading.value = 'pending';
+      }
+    }
+  };
 </script>
 
 <style lang="">

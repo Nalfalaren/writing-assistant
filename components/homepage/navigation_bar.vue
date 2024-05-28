@@ -10,7 +10,7 @@
       >
         <div class="flex flex-row justify-between items-center px-4">
           <div class="flex flex-row items-center gap-[20px]">
-            <h1 class="text-3xl text-[#0A2FB6] font-bold" @click="$router.push('/home')">Correctly</h1>
+            <!-- <h1 class="text-3xl text-[#0A2FB6] font-bold" @click="$router.push('/home')">Correctly</h1> -->
             <UTooltip text="Click on here to expand and narrow!">
               <UIcon
                 :name="
@@ -140,7 +140,6 @@ const errorURL = router.currentRoute.value.query.error;
 const code = router.currentRoute.value.query.code;
 const getToken = async () => {
   const data = await getAccessToken(code);
-  console.log(data);
   localStorage.setItem('accessToken', data.access_token);
   localStorage.setItem('refreshToken', data.refresh_token);
   localStorage.setItem('client_id', data.client_id);
@@ -148,8 +147,9 @@ const getToken = async () => {
 if(errorURL){
   router.push('/login');
 }
-else if(code){
+ if(code){
   getToken();
+  console.log(code);
   successMessage('Login successfully');
 }
 const screen = useScreen();
