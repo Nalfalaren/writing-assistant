@@ -35,7 +35,10 @@ const links = [{
 }, {
   label: 'Paraphrase',
   icon: 'i-heroicons-arrow-path-rounded-square-solid',
-  to: '/home/paraphrase'
+  submenu: [
+    { label: 'Expand text', to: `/home/paraphrase/expand` },
+    { label: 'Shorten text', to: `/home/paraphrase/shorten` },
+  ]
 }, {
   label: 'Plagiarism',
   icon: 'i-heroicons-document-check-16-solid',
@@ -43,10 +46,7 @@ const links = [{
 }, {
   label: 'Text completion',
   icon: 'i-heroicons-paint-brush-20-solid',
-  submenu: [
-    { label: 'Paragraph', to: `/home/text-completion/paragraph` },
-    { label: 'Sentence', to: `/home/text-completion/sentence` },
-  ]
+  to: '/home/text-completion'
 },]
 </script>
 

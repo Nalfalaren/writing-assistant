@@ -77,6 +77,11 @@
                 ></UIcon>
               </div>
             </UTooltip>
+            <UTooltip text="Your account" v-if="image">
+              <div class="w-[50px] h-[50px]">
+                <img :src="image" alt="user_icon" class="w-full h-full object-cover rounded-full">
+              </div>
+            </UTooltip>
           </div>
         </div>
       </UCard>
@@ -133,26 +138,20 @@
 import { ref } from 'vue';
 import { useScreen } from '~/store/userHome.js';
 import successMessage from '../alert/SuccessAlert.js';
-const isOpen = ref(false);
-const isExpand = ref(false);
-const router = useRouter();
-const errorURL = router.currentRoute.value.query.error;
-const code = router.currentRoute.value.query.code;
-const getToken = async () => {
-  const data = await getAccessToken(code);
-  localStorage.setItem('accessToken', data.access_token);
-  localStorage.setItem('refreshToken', data.refresh_token);
-  localStorage.setItem('client_id', data.client_id);
-}
-if(errorURL){
-  router.push('/login');
-}
- if(code){
-  getToken();
-  console.log(code);
-  successMessage('Login successfully');
-}
+
+let image = '';
 const screen = useScreen();
+
+const getToken = async () => {
+  const avatar_url = useCookie('avatar_url', 'get').value;
+  image = decodeURIComponent(avatar_url);
+}
+
+  const access_token = useCookie('access-token', 'get');
+  
+  if(access_token){
+   await getToken();
+  }
 
 </script>
 

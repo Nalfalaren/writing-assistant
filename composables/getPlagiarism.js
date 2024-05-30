@@ -1,30 +1,29 @@
-import SuccessAlert from '@/components/alert/SuccessAlert.js'
-import failAlert from '~/components/alert/FailAlert.js';
-const getPlagiarism = async (params) => {;
-    const url = `http://localhost:8686/api/assistant/plagiarism`;
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            text: params,
-          }),
-    });
+import successMessage from "~/components/alert/SuccessAlert";
+import failAlert from "~/components/alert/FailAlert";
+import axios from "axios";
 
-    if (response.ok) {
-        const data = await response.json();
-        if(data.status === 500){
-            failAlert('Problem occured! Please try again!');
-            return;
-        }
-        SuccessAlert(data.message);
-        return data;
-    } else if (response.status === 403) { 
-        const error = await response.json();
-        return error;
+const getPlagiarismCheck = async (params) => {
+    console.log(params);
+    console.log({text : params});
+    const url = `http://localhost:8686/api/assistant/plagiarism-checker`;
+    try {
+        const response = await axios.post(
+            url,
+            {"text" : params}, 
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                withCredentials: true
+            }
+        );
+        console.log(response.data.body);
+        return response.data.body;
+    } catch (error) {
+        console.error(error);
+        failAlert("Failed to check grammar.");
+        throw error; 
     }
-    return;
-}
+};
 
-export default getPlagiarism;
+export default getPlagiarismCheck;

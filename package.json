@@ -14,12 +14,14 @@
     "@nuxt/ui": "^2.15.1",
     "@pinia/nuxt": "^0.5.1",
     "@vueuse/core": "^10.9.0",
+    "axios": "^1.7.2",
     "nuxt": "^3.11.2",
     "pinia": "^2.1.7",
     "sweetalert2": "^11.11.0",
     "unimport": "^3.7.1",
     "vue": "^3.4.21",
     "vue-async-computed": "^4.0.1",
+    "vue-cookies": "^1.8.4",
     "vue-router": "^4.3.0",
     "vue-select": "^3.20.3"
   }

@@ -1,8 +1,11 @@
 const developer = {
     CLIENT_ID: '405525693953-nev7rod0qb4bp0f4jifhgaeonf7cr6m3.apps.googleusercontent.com',
-    REDIRECT_URI: 'http://localhost:6868/home',
+    REDIRECT_URI: 'http://localhost:8686/api/auth/oauth/sign-in',
     RESPONSE_TYPE: 'code',
-    SCOPE: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+    scope: [
+                    'https://www.googleapis.com/auth/userinfo.profile',
+                    'https://www.googleapis.com/auth/userinfo.email'
+                ].join(' '),
     ACCESS_TYPE: 'offline',
     PROMPT: 'consent',
     SERVICE: 'lso',

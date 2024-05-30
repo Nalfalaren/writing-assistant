@@ -50,7 +50,7 @@
               </UButton>
             </form>
           </div>
-          <homepage-small_nav />
+          <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
         </div>
       </div>
     </UContainer>
@@ -60,7 +60,9 @@
 <script setup lang="js">
 import { ref, computed, onMounted, watch, nextTick } from 'vue';
 import getGrammarCheck from '@/composables/getGrammarCheck.js';
-
+import signInDialog from '../alert/SignInDialog';
+const router = useRouter();
+console.log(router.currentRoute.value.fullPath);
 const showModal = ref(false);
 const rawText = ref('');
 const hoveredElementId = ref(null);
@@ -68,12 +70,16 @@ const modalDiv = ref(null);
 const isLoading = ref('pending');
 const currentSuggestion = ref('');
 const currentErrorIndex = ref(-1);
-const data = ref({ body: { errorWords: [] } }); 
+const data = ref({ body: { word: [] } }); 
+
+if(router.currentRoute.value.fullPath === '/'){
+  signInDialog(router.push('/login'));
+}
 
 const showSuggestion = (index) => {
   const words = rawText.value.split(' ');
   const errorWord = words[index];
-  const error = data.value.body.errorWords.find(e => e.errorWord === errorWord);
+  const error = data.value.body.errors.find(e => e.word === errorWord);
   if (error) {
     currentSuggestion.value = error.suggestion;
     currentErrorIndex.value = index;
@@ -86,7 +92,7 @@ const handleSubmit = async () => {
   try {
     const result = await getGrammarCheck(rawText.value);
     console.log(result);
-    if (result && result.body && result.body.errorWords) {
+    if (result && result.body && result.body.word) {
       data.value = result;
       isLoading.value = 'success';
       updateContent();
@@ -113,10 +119,10 @@ const onInput = (event) => {
 };
 
 const highlightedText = computed(() => {
-  if (!data.value.body || !data.value.body.errorWords) return rawText.value;
-  const errorWordsSet = new Set(data.value.body.errorWords.map(error => error.errorWord));
+  if (!data.value.body || !data.value.body.word) return rawText.value;
+  const wordSet = new Set(data.value.body.errors.map(error => error.word));
   return rawText.value.split(' ').map((word, index) => {
-    if (errorWordsSet.has(word)) {
+    if (wordSet.has(word)) {
       return `<span id="${index}" class="text-red-400 hover:bg-red-400">${word}</span>`;
     }
     return word;

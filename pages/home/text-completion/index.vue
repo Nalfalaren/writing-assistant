@@ -2,7 +2,7 @@
     <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : ''">
         <homepage-navigation_bar/>
         <homepage-vertical_bar/>
-        <homepage-paraphrase/>
+        <homepage-text_completion/>
     </div>
 </template>
 <script setup lang="js">
@@ -15,6 +15,5 @@ useSeoMeta({
     ogDescription: 'Correctly is the web for checking paragraph',
 })
 
-const route = useRoute();
 
 </script>

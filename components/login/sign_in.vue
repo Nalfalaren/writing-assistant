@@ -51,7 +51,7 @@
               class="bg-[#0A2FB6] py-4 text-xl w-full flex justify-center bg-white text-[#8E8E8E] hover:text-white border border-2 border-solid border-[#8E8E8E] hover:bg-blue-600"
               >
               <div class="w-[30px] h-[30px]"><NuxtImg src="../public/google.png" class="w-full h-full object-cover"></NuxtImg></div>
-              <ULink :to="googleLoginUrl">Login by Google</ULink>
+              <a :href="googleLoginUrl">Login by Google</a>
               </UButton
             >
           </UForm>
@@ -99,11 +99,12 @@ useSeoMeta({
 //   authFlow: getConfigObject('DEV').FLOWNAME,
 // }
 // const googleLoginUrl = `${data.root}?client_id=${data.client_id}&response_type=${data.respond_type}&access_type=${encodeURIComponent(data.status)}&redirect_uri=${encodeURIComponent(data.url)}&prompt=${encodeURIComponent(data.prompts)}&scope=${encodeURIComponent(data.scope)}&service=${data.service}&o2v=${data.o2v}&theme=${data.theme}&ddm=${data.o2v}&flowName=${data.authFlow}`;
+
 const params = {
         client_id: '405525693953-nev7rod0qb4bp0f4jifhgaeonf7cr6m3.apps.googleusercontent.com',
         response_type: 'code',
         access_type: 'offline',
-        redirect_uri: 'http://localhost:6868/home',
+        redirect_uri: 'http://localhost:8686/api/auth/oauth/sign-in',
         prompt: "consent",
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
@@ -113,7 +114,7 @@ const params = {
 
     const searchParams = new URLSearchParams(params);
     const root = 'https://accounts.google.com/o/oauth2/v2/auth';
-    const googleLoginUrl = `${root}?${searchParams.toString()}`;
+    const googleLoginUrl = `${root}?${searchParams.toString()}`
     
 const userInfo = userStore();
 

@@ -15,6 +15,5 @@ useSeoMeta({
     ogDescription: 'Correctly is the web for checking paragraph',
 })
 
-const route = useRoute();
 
 </script>

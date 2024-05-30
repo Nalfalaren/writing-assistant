@@ -1,23 +1,26 @@
 import successMessage from "~/components/alert/SuccessAlert";
 import failAlert from "~/components/alert/FailAlert";
-const getGrammarCheck = async (params) => {
-    const url = `http://localhost:8686/api/assistant/grammar-checker`;
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text: params }),
-    });
+import axios from "axios";
 
-    if (response.ok) {
-        const data = await response.json();
-        return data;
-    } else if (response.status === 403) {
-        const error = await response.json();
-        return error;
+const getGrammarCheck = async (params) => {
+
+    const url = `http://localhost:8686/api/assistant/grammar-checker`;
+
+    try {
+        const response = await axios.post(
+            url,
+            { "text": params }, 
+            {
+                headers: {'Content-Type' : 'application/json'},
+                withCredentials: true,
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error(error.response);
+        failAlert("Failed to check grammar.");
+        throw error; // Re-throw error after logging and showing alert
     }
-    return;
-}
+};
 
 export default getGrammarCheck;

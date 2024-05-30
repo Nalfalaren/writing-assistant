@@ -2,7 +2,7 @@
     <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : ''">
         <homepage-navigation_bar/>
         <homepage-vertical_bar/>
-        <homepage-text-completion_sen/>
+        <homepage-paraphrase_expand/>
     </div>
 </template>
 <script setup lang="js">
@@ -16,5 +16,4 @@ useSeoMeta({
 })
 
 const route = useRoute();
-
 </script>

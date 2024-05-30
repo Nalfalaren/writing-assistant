@@ -1,27 +1,57 @@
 <template>
   <div>
     <UContainer class="">
-      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3">
+      <div
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3"
+      >
         <div class="">
           <div class="relative aspect-video w-[1400px] h-[800px]">
-            <form @submit.prevent="handleSubmit" @keydown.enter.prevent="handleSubmit">
+            <form
+              @submit.prevent="handleSubmit"
+              @keydown.enter.prevent="handleSubmit"
+            >
               <textarea
                 color="white"
                 variant="outline"
                 placeholder="Type something here..."
                 class="w-full h-full p-4 outline-none text-2xl"
                 v-model="rawText"
+                v-show="isLoading !== 'success'"
               ></textarea>
-              <div v-show="isLoading === 'loading'"><img src="~/public/loading.gif" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" alt="loading"></div>
-              <div v-show="isLoading === 'pending'">
-                <template>
-  <UMeter :value="35" indicator label="Plagiarism rate"/>
-</template>
+              <div v-show="isLoading === 'loading'">
+                <img
+                  src="~/public/loading.gif"
+                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                  alt="loading"
+                />
               </div>
-              <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2">Submit</UButton>
+              <div v-show="isLoading === 'success'">
+                <div v-for="(text, index) in plagiarism" :key="index" class="flex flex-col mt-[50px]">
+        
+                  <div class="flex flex-col justify-between gap-[20px]">
+                    <div class="basis-[50%]">
+                      <h1 class="text-red-500 text-2xl font-bold">
+                        Website: <ULink :to="text.link">{{ text.link }}</ULink>
+                      </h1>
+                    </div>
+                    <div class="basis-[30%]">
+                      <h1 class="text-2xl">Similarity: <span :class="Math.round(+text.similarity) > 30 ? 'text-red-400 font-bold text-2xl' : 'text-green-400 text-2xl font-bold'">{{ Math.round(+text.similarity) }}%</span></h1>
+                      <template>
+                        <UMeter :value="25" indicator label="Plagiarism rate" />
+                      </template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <UButton
+                type="submit"
+                class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2"
+                :disabled="isLoading !== 'pending'"
+                >Submit</UButton
+              >
             </form>
           </div>
-          <homepage-small_nav/>
+          <homepage-small_nav />
         </div>
       </div>
     </UContainer>
@@ -29,17 +59,18 @@
 </template>
 
 <script setup lang="js">
-
-
+import successMessage from '../alert/SuccessAlert';
 let rawText = ref('');
-const plagiarism = ref({});
+const plagiarism = ref([]);
 const isLoading = ref('pending')
+
 const handleSubmit = async () => {
     try{
       isLoading.value = 'loading',
       plagiarism.value = await getPlagiarism(rawText.value);
-      if(await plagiarism.value.body){
+      if(plagiarism.value){
         isLoading.value = 'success';
+        successMessage("Check plagiarism successfully!")
       } 
     }
     catch(error){
@@ -54,5 +85,4 @@ const handleSubmit = async () => {
 </script>
 
 <style lang="">
-
 </style>
