@@ -16,7 +16,7 @@
           </p>
         </div>
         <div>
-          <UForm class="space-y-4 mt-8" @submit="$router.push('/home')">
+          <!-- <UForm class="space-y-4 mt-8" @submit="$router.push('/home')">
             <UFormGroup label="Username" name="user_name" size="xl">
               <UInput
                 placeholder="Type the username here..."
@@ -47,19 +47,20 @@
               @click="loading"
               >Login</UButton
             >
-            <UButton
-              class="bg-[#0A2FB6] py-4 text-xl w-full flex justify-center bg-white text-[#8E8E8E] hover:text-white border border-2 border-solid border-[#8E8E8E] hover:bg-blue-600"
+          
+          </UForm> -->
+          <UButton
+              class="bg-[#0A2FB6] py-4 text-xl w-full flex justify-center bg-white text-[#8E8E8E] hover:text-white border border-2 border-solid border-[#8E8E8E] hover:bg-blue-600 my-8"
               >
               <div class="w-[30px] h-[30px]"><NuxtImg src="../public/google.png" class="w-full h-full object-cover"></NuxtImg></div>
               <a :href="googleLoginUrl">Login by Google</a>
               </UButton
             >
-          </UForm>
-          <hr class="mb-4 mx-auto w-1/2" />
-          <div class="flex flex-row items-center gap-[5px] justify-center">
+          <hr class="mb-4" />
+          <!-- <div class="flex flex-row items-center gap-[5px] justify-center">
             <p class="text-[#8E8E8E]">Don't have account?</p>
             <ULink to="/sign-up">Register</ULink>
-          </div>
+          </div> -->
           
         </div>
       </UCard>

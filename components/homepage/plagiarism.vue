@@ -27,15 +27,14 @@
               </div>
               <div v-show="isLoading === 'success'">
                 <div v-for="(text, index) in plagiarism" :key="index" class="flex flex-col mt-[50px]">
-        
                   <div class="flex flex-col justify-between gap-[20px]">
                     <div class="basis-[50%]">
-                      <h1 class="text-red-500 text-2xl font-bold">
+                      <h1 class="text-red-500 text-2xl font-bold truncate">
                         Website: <ULink :to="text.link">{{ text.link }}</ULink>
                       </h1>
                     </div>
                     <div class="basis-[30%]">
-                      <h1 class="text-2xl">Similarity: <span :class="Math.round(+text.similarity) > 30 ? 'text-red-400 font-bold text-2xl' : 'text-green-400 text-2xl font-bold'">{{ Math.round(+text.similarity) }}%</span></h1>
+                      <h1 class="text-2xl">Similarity: <span :class="Math.round(+text.similarity) > 30 ? 'text-red-400 font-bold text-2xl' : 'text-green-400 text-2xl font-bold'">{{ +text.similarity }}%</span></h1>
                       <template>
                         <UMeter :value="25" indicator label="Plagiarism rate" />
                       </template>
@@ -45,7 +44,7 @@
               </div>
               <UButton
                 type="submit"
-                class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2"
+                class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
                 :disabled="isLoading !== 'pending'"
                 >Submit</UButton
               >
@@ -60,13 +59,17 @@
 
 <script setup lang="js">
 import successMessage from '../alert/SuccessAlert';
+import WaitingAlert from '../alert/WaitingAlert';
 let rawText = ref('');
 const plagiarism = ref([]);
 const isLoading = ref('pending')
 
 const handleSubmit = async () => {
     try{
-      isLoading.value = 'loading',
+      isLoading.value = 'loading';
+      if(isLoading.value === 'loading'){
+        WaitingAlert();
+      }
       plagiarism.value = await getPlagiarism(rawText.value);
       if(plagiarism.value){
         isLoading.value = 'success';

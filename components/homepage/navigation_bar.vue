@@ -21,7 +21,7 @@
                 :class="
                   screen.screenMode === 'dark'
                     ? 'w-[30px] h-[30px] text-white hover:bg-green-900 mt-[10px]'
-                    : 'w-[30px] h-[30px] hover:bg-green-900 mt-[10px]'
+                    : 'w-[30px] h-[30px] hover:bg-green-900 mt-[10px] text-[#753fea]'
                 "
                 @click="screen.handleToggle()"
               ></UIcon>
@@ -31,41 +31,14 @@
             <h1
               :class="
                 screen.screenMode === 'dark'
-                  ? 'font-bold text-2xl text-white'
-                  : 'font-bold text-2xl'
+                  ? 'font-bold text-3xl text-white '
+                  : 'font-bold text-3xl text-[#753fea]'
               "
             >
-              Correctly {{ param === "index" ? "grammar" : param }}
+              Correctly
             </h1>
           </div>
           <div class="flex flex-row items-center gap-[20px]">
-            <UTooltip text="Switch to Dark Mode">
-              <div
-                class="bg-[#EDEDED] rounded-full w-[40px] h-[40px] relative"
-                v-if="screen.screenMode === 'light'"
-              >
-                <UIcon
-                  name="i-heroicons-moon-20-solid"
-                  class="absolute top-2 left-2.5 w-[20px] h-[20px] hover:text-green-700 duration-300 ease-in-out"
-                  @click="screen.changeScreenMode('dark')"
-                ></UIcon>
-              </div>
-            </UTooltip>
-            <UTooltip
-              text="Switch to Light Mode"
-              v-if="screen.screenMode === 'dark'"
-            >
-              <div
-                class="bg-[#EDEDED] rounded-full w-[40px] h-[40px] relative"
-                v-if="screen.screenMode === 'dark'"
-              >
-                <UIcon
-                  name="i-heroicons-sun"
-                  class="absolute top-2 left-2.5 w-[20px] h-[20px] hover:text-green-700 duration-300 ease-in-out"
-                  @click="screen.changeScreenMode('light')"
-                ></UIcon>
-              </div>
-            </UTooltip>
             <UTooltip text="User account">
               <div
                 class="bg-[#EDEDED] rounded-full w-[40px] h-[40px] relative"
@@ -73,7 +46,7 @@
               >
                 <UIcon
                   name="i-heroicons-user-16-solid"
-                  class="absolute top-2 left-2.5 w-[20px] h-[20px] hover:text-green-700"
+                  class="absolute top-2 left-2.5 w-[20px] h-[20px] hover:text-green-700 text-[#753fea]"
                 ></UIcon>
               </div>
             </UTooltip>
@@ -141,17 +114,19 @@ import successMessage from '../alert/SuccessAlert.js';
 
 let image = '';
 const screen = useScreen();
-
+const access_token = ref('');
 const getToken = async () => {
   const avatar_url = useCookie('avatar_url', 'get').value;
   image = decodeURIComponent(avatar_url);
+  successMessage("Login successfully")
 }
 
-  const access_token = useCookie('access-token', 'get');
+  access_token.value = useCookie('access-token', 'get');
   
   if(access_token){
    await getToken();
   }
+
 
 </script>
 

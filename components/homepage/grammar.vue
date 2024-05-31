@@ -8,29 +8,28 @@
               @submit.prevent="handleSubmit"
               @keydown.enter.prevent="handleSubmit"
             >
-              <div
-                contenteditable="true"
+              <textarea
+                color="white"
+                variant="outline"
+                placeholder="Type something here..."
                 class="w-full h-full p-4 outline-none text-2xl"
-                @input="onInput"
-                @blur="highlightErrors"
-                ref="editableDiv"
-              >
-                Enter something here...
-              </div>
+                v-model="rawText"
+                v-show="isLoading !== 'success'"
+              ></textarea>
+              <div v-html="highlightedText" v-show="isLoading === 'success'" class="text-2xl"></div>
               <div v-show="isLoading === 'loading'"><img src="~/public/loading.gif" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" alt="loading"></div>
               <div
-                v-if="showModal === true"
+                v-if="showModal"
                 class="flex items-center justify-center z-50"
                 id="1"
               >
                 <div class="bg-white p-6 rounded shadow-md absolute left-1 top-12">
                   <p>
-                    Did you mean: <strong>{{ currentSuggestion }}</strong
-                    >?
+                    Did you mean: <strong>{{ currentSuggestion }}</strong>?
                   </p>
                   <button
                     @click="applySuggestion"
-                    class="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+                    class="mt-4 px-4 py-2 bg-blue-500 text-white rounded bg-[#753fea] hover:bg-[#5424b3]"
                   >
                     Apply
                   </button>
@@ -42,11 +41,14 @@
                   </button>
                 </div>
               </div>
-              <UButton
-                type="submit"
-                class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2"
-              >
+              <div class="mt-[100px]">
+                <span class="text-2xl">Word count: {{ wordCount }}</span>
+              </div>
+              <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading === 'loading'" v-show="isLoading !== 'success'">
                 Submit
+              </UButton>
+              <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" v-show="isLoading === 'success'" @click="reset">
+                Reset
               </UButton>
             </form>
           </div>
@@ -58,11 +60,13 @@
 </template>
 
 <script setup lang="js">
-import { ref, computed, onMounted, watch, nextTick } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import getGrammarCheck from '@/composables/getGrammarCheck.js';
+import { useRouter } from 'vue-router';
 import signInDialog from '../alert/SignInDialog';
+import successMessage from '../alert/SuccessAlert';
+
 const router = useRouter();
-console.log(router.currentRoute.value.fullPath);
 const showModal = ref(false);
 const rawText = ref('');
 const hoveredElementId = ref(null);
@@ -70,19 +74,29 @@ const modalDiv = ref(null);
 const isLoading = ref('pending');
 const currentSuggestion = ref('');
 const currentErrorIndex = ref(-1);
-const data = ref({ body: { word: [] } }); 
+const data = ref({ body: { errors: [] } });
+const highlightedText = ref('');
 
 if(router.currentRoute.value.fullPath === '/'){
   signInDialog(router.push('/login'));
 }
 
-const showSuggestion = (index) => {
-  const words = rawText.value.split(' ');
-  const errorWord = words[index];
-  const error = data.value.body.errors.find(e => e.word === errorWord);
+const wordCount = computed(() => {
+  return rawText.value.split(/\s+/).filter(word => word.length > 0).length;
+});
+
+const reset = () => {
+  rawText.value = '';
+  highlightedText.value = '';
+  isLoading.value = 'pending';
+  successMessage("Reset successfully");
+};
+
+const showSuggestion = (errorIndex) => {
+  const error = data.value.body.errors[errorIndex];
   if (error) {
     currentSuggestion.value = error.suggestion;
-    currentErrorIndex.value = index;
+    currentErrorIndex.value = errorIndex;
     showModal.value = true;
   }
 };
@@ -92,10 +106,10 @@ const handleSubmit = async () => {
   try {
     const result = await getGrammarCheck(rawText.value);
     console.log(result);
-    if (result && result.body && result.body.word) {
+    if (result && result.body && result.body.errors) {
       data.value = result;
+      highlightedText.value = generateHighlightedText();
       isLoading.value = 'success';
-      updateContent();
     } else {
       isLoading.value = 'pending';
     }
@@ -107,41 +121,30 @@ const handleSubmit = async () => {
 
 const applySuggestion = () => {
   const words = rawText.value.split(' ');
-  words[currentErrorIndex.value] = currentSuggestion.value;
+  const error = data.value.body.errors[currentErrorIndex.value];
+  const errorWords = error.word.split(' ');
+  const suggestionWords = error.suggestion.split(' ');
+
+  const errorStartIndex = words.join(' ').indexOf(error.word);
+  const errorWordCount = errorWords.length;
+
+  words.splice(errorStartIndex, errorWordCount, ...suggestionWords);
+  
   rawText.value = words.join(' ');
   showModal.value = false;
-  updateContent();
+  successMessage('Fixed successfully!');
 };
 
-const onInput = (event) => {
-  rawText.value = event.target.innerText;
-  updateContent();
-};
-
-const highlightedText = computed(() => {
-  if (!data.value.body || !data.value.body.word) return rawText.value;
-  const wordSet = new Set(data.value.body.errors.map(error => error.word));
-  return rawText.value.split(' ').map((word, index) => {
-    if (wordSet.has(word)) {
-      return `<span id="${index}" class="text-red-400 hover:bg-red-400">${word}</span>`;
-    }
-    return word;
-  }).join(' ');
-});
-
-const updateContent = () => {
-  nextTick(() => {
-    const editableDiv = document.querySelector('[contenteditable]');
-    if (editableDiv) {
-      editableDiv.innerHTML = highlightedText.value;
-      const range = document.createRange();
-      const sel = window.getSelection();
-      range.selectNodeContents(editableDiv);
-      range.collapse(false);
-      sel.removeAllRanges();
-      sel.addRange(range);
-    }
+const generateHighlightedText = () => {
+  let highlighted = rawText.value;
+  data.value.body.errors.forEach((error, index) => {
+    const errorWord = error.word;
+    console.log(errorWord);
+    const highlightedWord = `<span id="${index}" class="text-red-400 hover:bg-red-400 underline cursor-pointer">${errorWord}</span>`;
+    highlighted = highlighted.replace(new RegExp(`\\b${errorWord}\\b`, 'g'), highlightedWord);
+    console.log(highlightedWord);
   });
+  return highlighted;
 };
 
 onMounted(() => {
@@ -149,7 +152,7 @@ onMounted(() => {
     const target = event.target;
     if (target && target.matches('span[id]')) {
       const id = target.getAttribute('id');
-      showSuggestion(id);
+      showSuggestion(Number(id));
       hoveredElementId.value = id;
       showModal.value = true;
     }
@@ -163,15 +166,7 @@ onMounted(() => {
     });
   }
 });
-
-watch(rawText, () => {
-  handleSubmit();
-});
 </script>
-
-
-
-
 
 <style lang="">
 </style>

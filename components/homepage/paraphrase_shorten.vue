@@ -22,9 +22,6 @@
               <div v-show="isLoading === 'success'" class="mt-[50px]">
                 <select v-model="selectedChoice" @change="handleAnswer" class="p-4 w-1/2 text-2xl truncate border border-2 border-solid border-gray-500">
                   <option disabled value="" class="h-[200px]">Choose your answer: </option>
-                  <option :value="rawText" class="truncate">
-                    {{ rawText }}
-                  </option>
                   <option v-for="(choice, index) in paragraph" :value="choice" :key="index" class="truncate">
                     {{ choice }}
                   </option>
@@ -32,8 +29,8 @@
               </div>
               <div class="mt-[100px]"><span class="text-2xl">Word count: {{ isLoading === 'success' ? paraphrasedAnswer.split(' ').length : wordCount }}</span></div>
               <div class="flex flex-row justify-between items-center">
-                <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Continue</UButton>
-                <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
+                <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Reset</UButton>
+                <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
               </div>
             </form>
           </div>

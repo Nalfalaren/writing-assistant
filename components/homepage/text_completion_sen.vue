@@ -32,7 +32,7 @@
               </select>
               <UButton
                 type="submit"
-                class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2"
+                class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
                 >Submit</UButton
               >
             </form>

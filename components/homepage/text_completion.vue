@@ -18,7 +18,7 @@
                 v-model="rawText"
                 v-show="isLoading !== 'success'"
               ></textarea>
-              <div v-show="paraphrasedAnswer">
+              <div v-show="paraphrasedAnswer" class="mb-[30px]">
                 <h1 class="font-bold text-2xl">{{ paraphrasedAnswer }}</h1>
               </div>
               <div v-show="isLoading === 'loading'">
@@ -47,8 +47,8 @@
               </select>
               </div>
               <div class="mt-[100px]"><span class="text-2xl">Word count: {{ isLoading === 'success' ? paraphrasedAnswer.split(' ').length : wordCount }}</span></div>
-              <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Continue</UButton>
-                <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
+              <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Reset</UButton>
+                <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
             </form>
           </div>
           <homepage-small_nav />
@@ -75,7 +75,8 @@ const wordCount = computed(() => {
 });
 
 const handleAnswer = (event) => {
-  paraphrasedAnswer.value = event.target.value;
+  const ans = event.target.value;
+  paraphrasedAnswer.value = rawText.value + " " + ans;
 };
 
 const reset = () => {

@@ -1,6 +1,8 @@
 <template>
     <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : ''">
-        <homepage-dashboard></homepage-dashboard>
+        <dashboard-nav_bar></dashboard-nav_bar>
+        <homepage-vertical_bar></homepage-vertical_bar>
+        <dashboard-history></dashboard-history>
     </div>
 </template>
 <script setup lang="js">

@@ -3,7 +3,8 @@ import failAlert from "~/components/alert/FailAlert";
 import axios from "axios";
 
 const getGrammarCheck = async (params) => {
-
+    console.log(params);
+    
     const url = `http://localhost:8686/api/assistant/grammar-checker`;
 
     try {
@@ -15,11 +16,12 @@ const getGrammarCheck = async (params) => {
                 withCredentials: true,
             }
         );
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error(error.response);
-        failAlert("Failed to check grammar.");
-        throw error; // Re-throw error after logging and showing alert
+        failAlert("Loading...");
+        throw error; 
     }
 };
 
