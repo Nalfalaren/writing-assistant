@@ -14,9 +14,10 @@
                 color="white"
                 variant="outline"
                 placeholder="Type something here..."
-                class="w-full h-full p-4 outline-none text-2xl"
+                class="w-full p-4 outline-none text-2xl"
                 v-model="rawText"
                 v-show="isLoading !== 'success'"
+                :disabled="isLoading === 'loading'"
               ></textarea>
               <div v-show="isLoading === 'loading'">
                 <img

@@ -12,6 +12,7 @@
                 class="w-full h-full p-4 outline-none text-2xl"
                 v-model="rawText"
                 v-show="isLoading !== 'success'"
+                :disabled="isLoading === 'loading'"
               ></textarea>
               <div v-show="paraphrasedAnswer">
                 <h1 class="font-bold text-2xl">{{ paraphrasedAnswer }}</h1>

@@ -4,8 +4,6 @@ import axios from "axios";
 
 const getGrammarCheck = async (params) => {
 
-    const url = `http://localhost:8686/api/assistant/text-completion`;
-
     try {
         const response = await axios.post(
             'http://localhost:8686/api/assistant/text-completion',
@@ -17,7 +15,7 @@ const getGrammarCheck = async (params) => {
         return response.data.body.versions;
     } catch (error) {
         console.error(error.response);
-        failAlert("Failed to check grammar.");
+        failAlert("Please wait for a minute before trying again!");
         throw error;
     }
 };

@@ -23,7 +23,7 @@ const getPlagiarismCheck = (params) => {
     })
     .catch(error => {
         console.error(error);
-        failAlert("Failed to check grammar.");
+        failAlert("Please wait for a minute before trying again!");
         throw error;
     });
 };

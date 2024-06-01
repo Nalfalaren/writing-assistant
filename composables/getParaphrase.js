@@ -21,7 +21,7 @@ const getParaphrase = async (type, params) => {
         return response.data.body.versions;
     } catch (error) {
         console.error(error);
-        failAlert("OOps! Some problems occurs.");
+        failAlert("Please wait for a minute before trying again!");
         throw error; 
     }
 };

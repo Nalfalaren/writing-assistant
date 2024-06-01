@@ -1,7 +1,7 @@
 <template>
   <div>
     <UContainer>
-      <div class="absolute top-[20%] left-[20%]">
+      <div class="absolute top-[25%] left-[20%]">
         <div class="px-32">
           <div class="relative aspect-video w-[1400px] h-[800px]">
             <form
@@ -15,6 +15,7 @@
                 class="w-full h-full p-4 outline-none text-2xl"
                 v-model="rawText"
                 v-show="isLoading !== 'success'"
+                :disabled="isLoading === 'loading'"
               ></textarea>
               <div v-html="highlightedText" v-show="isLoading === 'success'" class="text-2xl"></div>
               <div v-show="isLoading === 'loading'"><img src="~/public/loading.gif" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" alt="loading"></div>
@@ -105,7 +106,11 @@ const handleSubmit = async () => {
   isLoading.value = 'loading';
   try {
     const result = await getGrammarCheck(rawText.value);
-    console.log(result);
+    console.log(result)
+    if(result.body.errors.length === 0){
+      isLoading.value = 'pending';
+      successMessage('No errors found!')
+    }
     if (result && result.body && result.body.errors) {
       data.value = result;
       highlightedText.value = generateHighlightedText();
@@ -120,29 +125,26 @@ const handleSubmit = async () => {
 };
 
 const applySuggestion = () => {
-  const words = rawText.value.split(' ');
   const error = data.value.body.errors[currentErrorIndex.value];
-  const errorWords = error.word.split(' ');
-  const suggestionWords = error.suggestion.split(' ');
+  const errorWord = error.word;
+  const suggestionWord = error.suggestion;
+  const regExp = new RegExp(`\\b${errorWord}\\b`);
+  rawText.value = rawText.value.replace(regExp, suggestionWord);
 
-  const errorStartIndex = words.join(' ').indexOf(error.word);
-  const errorWordCount = errorWords.length;
-
-  words.splice(errorStartIndex, errorWordCount, ...suggestionWords);
-  
-  rawText.value = words.join(' ');
   showModal.value = false;
   successMessage('Fixed successfully!');
+  highlightedText.value = generateHighlightedText();
 };
+
 
 const generateHighlightedText = () => {
   let highlighted = rawText.value;
   data.value.body.errors.forEach((error, index) => {
     const errorWord = error.word;
-    console.log(errorWord);
+    // console.log(errorWord);
     const highlightedWord = `<span id="${index}" class="text-red-400 hover:bg-red-400 underline cursor-pointer">${errorWord}</span>`;
     highlighted = highlighted.replace(new RegExp(`\\b${errorWord}\\b`, 'g'), highlightedWord);
-    console.log(highlightedWord);
+    // console.log(highlightedWord);
   });
   return highlighted;
 };

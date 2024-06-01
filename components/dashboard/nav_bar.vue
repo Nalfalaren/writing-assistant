@@ -9,8 +9,8 @@
               <UIcon
                 :name="
                   screen.isToggle
-                    ? 'i-heroicons-chevron-double-left-16-solid'
-                    : 'i-heroicons-chevron-double-right-16-solid'
+                    ? 'i-heroicons-chevron-double-left-16-solid bg-[#753fea]'
+                    : 'i-heroicons-chevron-double-right-16-solid bg-[#753fea]'
                 "
                 :class="
                   screen.screenMode === 'dark'
@@ -23,7 +23,7 @@
           </div>
           <div>
             <h1
-              :class="'font-bold text-3xl text-black'"
+              :class="'font-bold text-3xl text-[#753fea]'"
             >
                 Correctly 
             </h1>
@@ -31,7 +31,7 @@
             </div>
             <div class="flex flex-row items-center gap-[20px]">
                 <div class="w-[60px] h-[60px]"><nuxt-img :src="userImg" class="w-full h-full object-cover rounded-full"></nuxt-img></div>
-                <div><span class="text-xl font-bold">{{ userName }}</span></div>
+                <div><span class="text-xl font-bold text-[#753fea]">{{ userName }}</span></div>
             </div>
         </div>
         </UCard>
