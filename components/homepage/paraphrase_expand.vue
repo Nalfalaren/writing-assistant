@@ -32,6 +32,7 @@
               <div class="flex flex-row justify-between items-center">
                 <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Reset</UButton>
                 <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
+                <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="paraphrasedAnswer ? '' : 'hidden'">Save</UButton>
               </div>
             </form>
           </div>
@@ -45,6 +46,7 @@
 <script setup lang="js">
 import { ref, computed, watch } from 'vue';
 import getParaphrase from '~/composables/getParaphrase.js';
+import successMessage from '../alert/SuccessAlert';
 
 let rawText = ref('');
 let paragraph = ref([]);
@@ -81,6 +83,13 @@ const handleSubmit = async () => {
     }
   }
 };
+
+const handleSave = async () => {
+  const saveData = await saveChoice(rawText.value, selectedChoice.value, 'paraphrase');
+  if(saveData){
+    successMessage('Saved successfully!')
+  }
+}
 
 </script>
 

@@ -6,7 +6,7 @@
                     <UCard class="w-[1500px] flex-1" @click="() => handleDetail(index)">
                         <div class="mb-[5px] flex flex-row"><h1 class="text-xl"><span class="font-bold">Type:</span> {{ history.type }}</h1></div>
                         <div class="mb-[5px]"><h1 :class="click[index] === false ? 'truncate' : ''" class="text-xl"><span class="font-bold">Input text :</span> {{history.inputText}}</h1></div>
-                        <div class="mb-[5px]"><h1 :class="click[index] === false ? 'truncate' : ''" class="text-xl"><span class="font-bold">Output text:</span> {{JSON.parse(history.outputText)}}</h1></div>
+                        <div class="mb-[5px]"><h1 :class="click[index] === false ? 'truncate' : ''" class="text-xl"><span class="font-bold">Output text:</span> {{history.outputText}}</h1></div>
                         <div><h1 class="truncate text-xl"><span class="font-bold">Updated at:</span> {{formatDate(history.updatedAt)}}</h1></div>
                         <!-- <div class="ml-[90%]"><h1 class="text-[#753fea] hover:font-bold">More details...</h1></div> -->
                     </UCard>

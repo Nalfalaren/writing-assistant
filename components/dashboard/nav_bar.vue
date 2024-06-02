@@ -41,7 +41,7 @@
 <script setup lang="js">
 import { useScreen } from '~/store/userHome.js'
 const screen = useScreen();
-const userName = useCookie('user_name', 'get');
+const userName = useCookie('name', 'get');
 const userImg = useCookie('avatar_url', 'get');
 </script>
 <style lang="">

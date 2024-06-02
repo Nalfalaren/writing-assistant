@@ -13,7 +13,7 @@
                 variant="outline"
                 placeholder="Type something here..."
                 class="w-full h-full p-4 outline-none text-2xl"
-                v-model="rawText"
+                v-model="finalText"
                 v-show="isLoading !== 'success'"
                 :disabled="isLoading === 'loading'"
               ></textarea>
@@ -51,6 +51,7 @@
               <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" v-show="isLoading === 'success'" @click="reset">
                 Reset
               </UButton>
+              <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="isLoading === 'success' ? '' : 'hidden'">Save</UButton>
             </form>
           </div>
           <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
@@ -69,7 +70,7 @@ import successMessage from '../alert/SuccessAlert';
 
 const router = useRouter();
 const showModal = ref(false);
-const rawText = ref('');
+const finalText = ref('');
 const hoveredElementId = ref(null);
 const modalDiv = ref(null);
 const isLoading = ref('pending');
@@ -77,17 +78,17 @@ const currentSuggestion = ref('');
 const currentErrorIndex = ref(-1);
 const data = ref({ body: { errors: [] } });
 const highlightedText = ref('');
-
+const firstText = ref('');
 if(router.currentRoute.value.fullPath === '/'){
   signInDialog(router.push('/login'));
 }
 
 const wordCount = computed(() => {
-  return rawText.value.split(/\s+/).filter(word => word.length > 0).length;
+  return finalText.value.split(/\s+/).filter(word => word.length > 0).length;
 });
 
 const reset = () => {
-  rawText.value = '';
+  finalText.value = '';
   highlightedText.value = '';
   isLoading.value = 'pending';
   successMessage("Reset successfully");
@@ -103,18 +104,24 @@ const showSuggestion = (errorIndex) => {
 };
 
 const handleSubmit = async () => {
+  firstText.value = finalText.value;
   isLoading.value = 'loading';
   try {
-    const result = await getGrammarCheck(rawText.value);
-    console.log(result)
-    if(result.body.errors.length === 0){
-      isLoading.value = 'pending';
-      successMessage('No errors found!')
-    }
-    if (result && result.body && result.body.errors) {
-      data.value = result;
-      highlightedText.value = generateHighlightedText();
-      isLoading.value = 'success';
+    const result = await getGrammarCheck(finalText.value);
+    if (result && result.body) {
+      if (result.body.errors.length === 0 && result.body.originalText === result.body.fixedText) {
+        isLoading.value = 'pending';
+        successMessage('No errors found!');
+        return;
+      }
+      if (result.body.errors.length > 0) {
+        data.value = result;
+        highlightedText.value = generateHighlightedText();
+        console.log(finalText.value);
+        isLoading.value = 'success';
+      } else {
+        isLoading.value = 'pending';
+      }
     } else {
       isLoading.value = 'pending';
     }
@@ -129,22 +136,21 @@ const applySuggestion = () => {
   const errorWord = error.word;
   const suggestionWord = error.suggestion;
   const regExp = new RegExp(`\\b${errorWord}\\b`);
-  rawText.value = rawText.value.replace(regExp, suggestionWord);
+  finalText.value = finalText.value.replace(regExp, suggestionWord);
 
   showModal.value = false;
   successMessage('Fixed successfully!');
   highlightedText.value = generateHighlightedText();
 };
 
-
 const generateHighlightedText = () => {
-  let highlighted = rawText.value;
+  let highlighted = finalText.value;
   data.value.body.errors.forEach((error, index) => {
     const errorWord = error.word;
-    // console.log(errorWord);
+    if(errorWord !== error.suggestion){
     const highlightedWord = `<span id="${index}" class="text-red-400 hover:bg-red-400 underline cursor-pointer">${errorWord}</span>`;
     highlighted = highlighted.replace(new RegExp(`\\b${errorWord}\\b`, 'g'), highlightedWord);
-    // console.log(highlightedWord);
+    }
   });
   return highlighted;
 };
@@ -168,6 +174,13 @@ onMounted(() => {
     });
   }
 });
+
+const handleSave = async () => {
+  const saveData = await saveChoice(firstText.value, finalText.value, 'grammar-checking');
+  if(saveData){
+    successMessage('Saved successfully!')
+  }
+}
 </script>
 
 <style lang="">

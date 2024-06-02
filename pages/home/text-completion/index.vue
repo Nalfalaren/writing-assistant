@@ -1,5 +1,5 @@
 <template>
-    <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : ''">
+    <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : 'bg-[#f4f3ff]'">
         <homepage-navigation_bar/>
         <homepage-vertical_bar/>
         <homepage-text_completion/>
@@ -15,5 +15,10 @@ useSeoMeta({
     ogDescription: 'Correctly is the web for checking paragraph',
 })
 
+const router = useRouter();
+const access_token = useCookie('access-token', 'get');
+if(!access_token.value){
+    router.push('/login')
+}
 
 </script>

@@ -43,12 +43,9 @@
                   </div>
                 </div>
               </div>
-              <UButton
-                type="submit"
-                class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
-                :disabled="isLoading !== 'pending'"
-                >Submit</UButton
-              >
+              <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
+              <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Reset</UButton>
+              <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="isLoading === 'success' ? '' : 'hidden'">Save</UButton>
             </form>
           </div>
           <homepage-small_nav />
@@ -86,6 +83,21 @@ const handleSubmit = async () => {
       }
     }
   };
+
+  const reset = () => {
+    rawText.value = '';
+    plagiarism.value = '',
+    isLoading.value = 'pending'
+    successMessage("Reset successfully!")
+  }
+
+  const handleSave = async () => {
+  const saveData = await saveChoice(rawText.value, plagiarism.value, 'plagiarism-checking');
+  if(saveData){
+    successMessage('Saved successfully!')
+  }
+}
+
 </script>
 
 <style lang="">

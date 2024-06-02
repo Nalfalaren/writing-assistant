@@ -117,7 +117,5 @@ const params = {
     const root = 'https://accounts.google.com/o/oauth2/v2/auth';
     const googleLoginUrl = `${root}?${searchParams.toString()}`
     
-const userInfo = userStore();
-
 
 </script>

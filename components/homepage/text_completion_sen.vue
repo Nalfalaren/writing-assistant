@@ -35,6 +35,7 @@
                 class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
                 >Submit</UButton
               >
+              <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="selectedChoice ? '' : 'hidden'">Save</UButton>
             </form>
           </div>
           <homepage-small_nav />
@@ -74,6 +75,12 @@ const handleSubmit = async () => {
   }
 };
 
+const handleSave = async () => {
+  const saveData = await saveChoice(rawText, selectedChoice.value, 'text-completion');
+  if(saveData){
+    successMessage('Saved successfully!')
+  }
+}
 // const handleChoice = () => {
 //   applyChoice.value = true;
 //   if(applyChoice.value = true){

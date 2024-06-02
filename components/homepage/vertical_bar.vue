@@ -32,7 +32,7 @@
             </div>
 
             <div
-              class="flex flex-row items-center gap-[20px] text-2xl hover:font-semibold hover:bg-[#D9D9D9] p-4 hover:rounded-[10px] text-[#753fea]"
+              class="flex flex-row items-center gap-[20px] text-2xl hover:font-semibold hover:bg-[#D9D9D9] p-4 hover:rounded-[10px] text-[#753fea]" @click="handleSignOut"
             >
               <UIcon
                 name="i-heroicons-arrow-left-start-on-rectangle-16-solid"
@@ -56,7 +56,7 @@ const screen = useScreen();
 const router = useRouter();
 const userName = ref('');
 
-userName.value = useCookie('user_name', 'get');
+userName.value = useCookie('name', 'get');
 
 const handleClickFunction = (name) => {
   screen.isFunctionClicked = name;
@@ -67,6 +67,11 @@ const handleClickFunction = (name) => {
     router.push('/home');
   }
  };
+
+ const handleSignOut = async () => {
+  router.push('/login');
+  await deleteCookie();
+ }
 
 </script>
 

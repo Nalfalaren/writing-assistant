@@ -49,6 +49,7 @@
               <div class="mt-[100px]"><span class="text-2xl">Word count: {{ isLoading === 'success' ? paraphrasedAnswer.split(' ').length + rawText.split(' ').length : wordCount }}</span></div>
               <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Reset</UButton>
                 <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
+                <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="paraphrasedAnswer ? '' : 'hidden'">Save</UButton>
             </form>
           </div>
           <homepage-small_nav />
@@ -61,6 +62,7 @@
 <script setup lang="js">
 import { ref } from 'vue';
 import getTextCompletion from '~/composables/GetTextCompletion.js';
+import successMessage from '../alert/SuccessAlert';
 
 
 let rawText = ref('');
@@ -90,6 +92,7 @@ const handleSubmit = async () => {
   try{
   isLoading.value = 'loading'
   const data = await getTextCompletion(rawText.value);
+  console.log(data);
   if(data){
   choices.value = await data;
   }
@@ -105,6 +108,13 @@ const handleSubmit = async () => {
       }
   }
 };
+
+const handleSave = async () => {
+  const saveData = await saveChoice(rawText.value, selectedChoice.value, 'text-completion');
+  if(saveData){
+    successMessage('Saved successfully!')
+  }
+}
 
 watch(rawText, () => {
   console.log(`Word count: ${wordCount.value}`);

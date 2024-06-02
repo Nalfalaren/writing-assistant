@@ -50,8 +50,8 @@
                 ></UIcon>
               </div>
             </UTooltip>
-            <UTooltip text="Your account" v-if="image">
-              <div class="w-[50px] h-[50px]">
+            <UTooltip text="Your account">
+              <div class="w-[50px] h-[50px]" v-show="image">
                 <img :src="image" alt="user_icon" class="w-full h-full object-cover rounded-full">
               </div>
             </UTooltip>
@@ -115,6 +115,7 @@ import successMessage from '../alert/SuccessAlert.js';
 let image = '';
 const screen = useScreen();
 const access_token = ref('');
+const router = useRouter();
 const getToken = async () => {
   const avatar_url = useCookie('avatar_url', 'get').value;
   image = decodeURIComponent(avatar_url);

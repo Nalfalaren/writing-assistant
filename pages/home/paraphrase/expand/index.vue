@@ -14,6 +14,9 @@ useSeoMeta({
     description: 'Correctly is the web for checking paragraph',
     ogDescription: 'Correctly is the web for checking paragraph',
 })
-
-const route = useRoute();
+const router = useRouter();
+const access_token = useCookie('access-token', 'get');
+if(!access_token.value){
+    router.push('/login')
+}
 </script>
