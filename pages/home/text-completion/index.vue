@@ -1,5 +1,5 @@
 <template>
-    <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : 'bg-[#f4f3ff]'">
+    <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : ''">
         <homepage-navigation_bar/>
         <homepage-vertical_bar/>
         <homepage-text_completion/>

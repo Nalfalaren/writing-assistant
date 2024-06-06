@@ -148,7 +148,7 @@ const generateHighlightedText = () => {
   data.value.body.errors.forEach((error, index) => {
     const errorWord = error.word;
     if(errorWord !== error.suggestion){
-    const highlightedWord = `<span id="${index}" class="text-red-400 hover:bg-red-400 underline cursor-pointer">${errorWord}</span>`;
+    const highlightedWord = `<span id="${index}" class="text-red-400 hover:font-bold underline cursor-pointer">${errorWord}</span>`;
     highlighted = highlighted.replace(new RegExp(`\\b${errorWord}\\b`, 'g'), highlightedWord);
     }
   });
