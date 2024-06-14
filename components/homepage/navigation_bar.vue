@@ -117,7 +117,7 @@ const screen = useScreen();
 const access_token = ref('');
 const router = useRouter();
 const getToken = async () => {
-  const avatar_url = useCookie('avatar_url', 'get').value;
+  const avatar_url = useCookie('avatar_img', 'get').value;
   image = decodeURIComponent(avatar_url);
   successMessage("Login successfully")
 }

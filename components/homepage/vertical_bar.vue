@@ -49,9 +49,6 @@
 <script setup lang="js">
 import { useScreen } from '~/store/userHome';
 import { useRouter } from 'vue-router';
-import { reactive } from 'vue';
-import successMessage from '../alert/SuccessAlert';
-
 const screen = useScreen();
 const router = useRouter();
 const userName = ref('');

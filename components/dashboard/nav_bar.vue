@@ -42,7 +42,7 @@
 import { useScreen } from '~/store/userHome.js'
 const screen = useScreen();
 const userName = useCookie('name', 'get');
-const userImg = useCookie('avatar_url', 'get');
+const userImg = useCookie('avatar_img', 'get');
 </script>
 <style lang="">
 </style>
