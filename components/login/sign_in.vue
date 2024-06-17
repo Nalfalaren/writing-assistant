@@ -85,37 +85,37 @@ useSeoMeta({
   ogDescription: 'This is the login page of Correctly'
 })
 
-const data = {
-  root: 'https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount',
-  client_id: getConfigObject('PRO').CLIENT_ID,
-  url: getConfigObject('PRO').REDIRECT_URI,
-  status: getConfigObject('PRO').ACCESS_TYPE,
-  respond_type: getConfigObject('PRO').RESPONSE_TYPE,
-  scope: getConfigObject('PRO').SCOPE,
-  prompts: getConfigObject('PRO').PROMPT,
-  service: getConfigObject('PRO').SERVICE,
-  o2v: getConfigObject('PRO').O2V,
-  theme: getConfigObject('PRO').THEME,
-  ddm: getConfigObject('PRO').DDM,
-  authFlow: getConfigObject('PRO').FLOWNAME,
-}
-const googleLoginUrl = `${data.root}?client_id=${data.client_id}&response_type=${data.respond_type}&access_type=${encodeURIComponent(data.status)}&redirect_uri=${encodeURIComponent(data.url)}&prompt=${encodeURIComponent(data.prompts)}&scope=${encodeURIComponent(data.scope)}&service=${data.service}&o2v=${data.o2v}&theme=${data.theme}&ddm=${data.o2v}&flowName=${data.authFlow}`;
+// const data = {
+//   root: 'https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount',
+//   client_id: getConfigObject('PRO').CLIENT_ID,
+//   url: getConfigObject('PRO').REDIRECT_URI,
+//   status: getConfigObject('PRO').ACCESS_TYPE,
+//   respond_type: getConfigObject('PRO').RESPONSE_TYPE,
+//   scope: getConfigObject('PRO').SCOPE,
+//   prompts: getConfigObject('PRO').PROMPT,
+//   service: getConfigObject('PRO').SERVICE,
+//   o2v: getConfigObject('PRO').O2V,
+//   theme: getConfigObject('PRO').THEME,
+//   ddm: getConfigObject('PRO').DDM,
+//   authFlow: getConfigObject('PRO').FLOWNAME,
+// }
+// const googleLoginUrl = `${data.root}?client_id=${data.client_id}&response_type=${data.respond_type}&access_type=${encodeURIComponent(data.status)}&redirect_uri=${encodeURIComponent(data.url)}&prompt=${encodeURIComponent(data.prompts)}&scope=${encodeURIComponent(data.scope)}&service=${data.service}&o2v=${data.o2v}&theme=${data.theme}&ddm=${data.o2v}&flowName=${data.authFlow}`;
 
-// const params = {
-//         client_id: '405525693953-nev7rod0qb4bp0f4jifhgaeonf7cr6m3.apps.googleusercontent.com',
-//         response_type: 'code',
-//         access_type: 'offline',
-//         redirect_uri: 'https://writing-assistant-app.onrender.com/api/auth/oauth/sign-in',
-//         prompt: "consent",
-//         scope: [
-//             'https://www.googleapis.com/auth/userinfo.profile',
-//             'https://www.googleapis.com/auth/userinfo.email'
-//         ].join(' ')
-//     }
+const params = {
+        client_id: '405525693953-nev7rod0qb4bp0f4jifhgaeonf7cr6m3.apps.googleusercontent.com',
+        response_type: 'code',
+        access_type: 'offline',
+        redirect_uri: 'https://writing-assistant-app.onrender.com/api/auth/oauth/sign-in',
+        prompt: "consent",
+        scope: [
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email'
+        ].join(' ')
+    }
 
-//     const searchParams = new URLSearchParams(params);
-//     const root = 'https://accounts.google.com/o/oauth2/v2/auth';
-//     const googleLoginUrl = `${root}?${searchParams.toString()}`
+    const searchParams = new URLSearchParams(params);
+    const root = 'https://accounts.google.com/o/oauth2/v2/auth';
+    const googleLoginUrl = `${root}?${searchParams.toString()}`
     
 
 </script>
