@@ -5,7 +5,7 @@ import axios from "axios";
 const getParaphrase = async (type, params) => {
     console.log(params);
     console.log({text : params});
-    const url = `http://localhost:8686/api/assistant/paraphrase`;
+    const url = `https://writing-assistant-app.onrender.com/api/assistant/paraphrase`;
     try {
         const response = await axios.post(
             url,

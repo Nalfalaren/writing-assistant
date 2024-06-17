@@ -1,6 +1,6 @@
 import axios from 'axios';
 const deleteCookie = () => {
-const response = axios.post('http://localhost:8686/api/auth/oauth/sign-out', {}, {
+const response = axios.post('https://writing-assistant-app.onrender.com/api/auth/oauth/sign-out', {}, {
     method: 'POST',
     withCredentials: true,
 }

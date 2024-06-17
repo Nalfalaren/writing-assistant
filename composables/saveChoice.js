@@ -3,7 +3,7 @@ const saveChoice = (input, output, type) => {
   try {
     console.log({ input: input, output: output, type: type });
     const response = axios.post(
-      "http://localhost:8686/api/assistant/save",
+      "https://writing-assistant-app.onrender.com/api/assistant/save",
       { input: input, output: output, type: type },
       {
         method: "POST",

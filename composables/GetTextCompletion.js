@@ -6,7 +6,7 @@ const getGrammarCheck = async (params) => {
 
     try {
         const response = await axios.post(
-            'http://localhost:8686/api/assistant/text-completion',
+            'https://writing-assistant-app.onrender.com/api/assistant/text-completion',
             {text: params},
             {
                 withCredentials: true,

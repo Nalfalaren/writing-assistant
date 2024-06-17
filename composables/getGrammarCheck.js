@@ -5,7 +5,7 @@ import axios from "axios";
 const getGrammarCheck = async (params) => {
     console.log(params);
     
-    const url = `http://localhost:8686/api/assistant/grammar-checker`;
+    const url = `https://writing-assistant-app.onrender.com/api/assistant/grammar-checker`;
 
     try {
         console.log(params);

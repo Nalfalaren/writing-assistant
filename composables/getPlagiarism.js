@@ -5,7 +5,7 @@ import axios from "axios";
 const getPlagiarismCheck = (params) => {
     console.log(params);
     console.log({text : params});
-    const url = `http://localhost:8686/api/assistant/plagiarism-checker`;
+    const url = `https://writing-assistant-app.onrender.com/api/assistant/plagiarism-checker`;
     
     return axios.post(
         url,
