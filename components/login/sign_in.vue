@@ -67,7 +67,7 @@
       <div class="w-full h-full relative xl:block hidden">
         <div>
           <nuxt-img
-            src="../public/login_img.png"
+            src="/login_img.png"
             class="w-full h-full object-cover"
           ></nuxt-img>
         </div>
