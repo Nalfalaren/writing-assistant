@@ -44,7 +44,6 @@
 </template>
 
 <script setup lang="js">
-import { ref, computed, watch } from 'vue';
 import getParaphrase from '~/composables/getParaphrase.js';
 import successMessage from '../alert/SuccessAlert';
 
@@ -93,6 +92,3 @@ const handleSave = async () => {
 
 </script>
 
-<style lang="">
-/* Add your styles here */
-</style>
