@@ -3,7 +3,7 @@
     <UContainer class="">
       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3">
         <div class="">
-          <div class="relative aspect-video w-[1400px] h-[800px]">
+          <div class="relative aspect-video">
             <form @submit.prevent="handleSubmit" @keydown.enter.prevent="handleSubmit">
               <textarea
                 color="white"
