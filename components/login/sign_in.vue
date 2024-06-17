@@ -102,7 +102,7 @@ useSeoMeta({
 // const googleLoginUrl = `${data.root}?client_id=${data.client_id}&response_type=${data.respond_type}&access_type=${encodeURIComponent(data.status)}&redirect_uri=${encodeURIComponent(data.url)}&prompt=${encodeURIComponent(data.prompts)}&scope=${encodeURIComponent(data.scope)}&service=${data.service}&o2v=${data.o2v}&theme=${data.theme}&ddm=${data.o2v}&flowName=${data.authFlow}`;
 
 const params = {
-        client_id: '405525693953-nev7rod0qb4bp0f4jifhgaeonf7cr6m3.apps.googleusercontent.com',
+        client_id: '405525693953-aa8k0fp1bpb6h8he2hts4bcf6r7tndec.apps.googleusercontent.com',
         response_type: 'code',
         access_type: 'offline',
         redirect_uri: 'https://writing-assistant-app.onrender.com/api/auth/oauth/sign-in',
