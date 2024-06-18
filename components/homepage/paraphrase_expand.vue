@@ -1,18 +1,20 @@
 <template>
-  <div>
+  <div class="flex flex-col justify-center">
+    <homepage-small_nav/>
     <UContainer class="">
       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3">
         <div class="">
-          <div class="relative aspect-video">
+          <div class="relative aspect-video w-[1400px] h-[600px]">
             <form @submit.prevent="handleSubmit" @keydown.enter.prevent="handleSubmit">
               <textarea
                 color="white"
                 variant="outline"
                 placeholder="Type something here..."
-                class="w-full h-full p-4 outline-none text-2xl"
+                class="w-full max-h-[400px] p-4 outline-none text-2xl resize-none"
                 v-model="rawText"
                 v-show="isLoading !== 'success'"
                 :disabled="isLoading === 'loading'"
+                rows="20"
               ></textarea>
               <div v-show="paraphrasedAnswer">
                 <h1 class="font-bold text-2xl">{{ paraphrasedAnswer }}</h1>
@@ -28,7 +30,8 @@
                   </option>
                 </select>
               </div>
-              <div class="mt-[100px]"><span class="text-2xl">Word count: {{ isLoading === 'success' ? paraphrasedAnswer.split(' ').length : wordCount }}</span></div>
+              <div class="mt-[100px]"><span class="text-2xl">Word count: {{ isLoading === 'success' ? paraphrasedAnswer.split(' ').length : wordCount }}</span>
+              </div>
               <div class="flex flex-row justify-between items-center">
                 <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Reset</UButton>
                 <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
@@ -36,7 +39,6 @@
               </div>
             </form>
           </div>
-          <homepage-small_nav/>
         </div>
       </div>
     </UContainer>

@@ -1,11 +1,12 @@
 <template>
   <div>
+    <homepage-small_nav />
     <UContainer class="">
       <div
         class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3"
       >
         <div class="">
-          <div class="relative aspect-video w-[1400px] h-[800px]">
+          <div class="relative aspect-video w-[1400px] h-[600px]">
             <form
               @submit.prevent="handleSubmit"
               @keydown.enter.prevent="handleSubmit"
@@ -14,10 +15,11 @@
                 color="white"
                 variant="outline"
                 placeholder="Type something here..."
-                class="w-full p-4 outline-none text-2xl"
+                class="w-full max-h-[400px] p-4 outline-none text-2xl resize-none"
                 v-model="rawText"
                 v-show="isLoading !== 'success'"
                 :disabled="isLoading === 'loading'"
+                rows="20"
               ></textarea>
               <div v-show="isLoading === 'loading'">
                 <img
@@ -48,7 +50,6 @@
               <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="isLoading === 'success' ? '' : 'hidden'">Save</UButton>
             </form>
           </div>
-          <homepage-small_nav />
         </div>
       </div>
     </UContainer>

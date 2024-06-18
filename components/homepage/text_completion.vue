@@ -1,11 +1,12 @@
 <template>
   <div>
+    <homepage-small_nav />
     <UContainer class="">
       <div
-        class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3"
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3 mt-16"
       >
         <div class="">
-          <div class="relative aspect-video w-[1400px] h-[800px]">
+          <div class="relative aspect-video w-[1400px] h-[600px]">
             <form
               @submit.prevent="handleSubmit"
               @keydown.enter.prevent="handleSubmit"
@@ -14,9 +15,10 @@
                 color="white"
                 variant="outline"
                 placeholder="Type something here..."
-                class="w-full h-full p-4 outline-none text-2xl"
+                class="w-full max-h-[400px] p-4 outline-none text-2xl resize-none"
                 v-model="rawText"
                 v-show="isLoading !== 'success'"
+                rows="20"
               ></textarea>
               <div v-show="paraphrasedAnswer" class="mb-[30px]">
                 <h1 class="text-2xl">{{ rawText + " " }} <span class="font-bold">{{ paraphrasedAnswer }}</span></h1>
@@ -52,7 +54,6 @@
                 <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="paraphrasedAnswer ? '' : 'hidden'">Save</UButton>
             </form>
           </div>
-          <homepage-small_nav />
         </div>
       </div>
     </UContainer>

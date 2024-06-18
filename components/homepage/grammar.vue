@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col justify-center">
+  <div class="">
     <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
     <div>
     <UContainer>
-      <div class="absolute top-[25%] left-[20%] w-[1400px] h-[800px] mt-[100px]">
-        <div class="px-32">
-          <div class="relative aspect-video w-full max-h-[800px]">
+      <div class="absolute top-[25%] left-[25%] mt-[100px]">
+        <div class="">
+          <div class="relative aspect-video w-[1400px] h-[600px]">
             <form
               @submit.prevent="handleSubmit"
               @keydown.enter.prevent="handleSubmit"
@@ -14,10 +14,11 @@
                 color="white"
                 variant="outline"
                 placeholder="Type something here..."
-                class="w-full h-full p-4 outline-none text-2xl"
+                class="w-full max-h-[400px] p-4 outline-none text-2xl resize-none"
                 v-model="finalText"
                 v-show="isLoading !== 'success'"
                 :disabled="isLoading === 'loading'"
+                rows="20"
               ></textarea>
               <div v-html="highlightedText" v-show="isLoading === 'success'" class="text-2xl"></div>
               <div v-show="isLoading === 'loading'"><img src="~/public/loading.gif" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" alt="loading"></div>
@@ -47,6 +48,7 @@
               <div class="mt-[100px]">
                 <span class="text-2xl">Word count: {{ wordCount }}</span>
               </div>
+              <div class="flex flex-row justify-between items-center">
               <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading === 'loading'" v-show="isLoading !== 'success'">
                 Submit
               </UButton>
@@ -54,6 +56,7 @@
                 Reset
               </UButton>
               <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="isLoading === 'success' ? '' : 'hidden'">Save</UButton>
+              </div>
             </form>
           </div>
         </div>
