@@ -3,6 +3,7 @@
     <UContainer>
       <div class="absolute top-[25%] left-[20%]">
         <div class="px-32">
+          <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
           <div class="relative aspect-video w-[1400px] h-[800px]">
             <form
               @submit.prevent="handleSubmit"
@@ -54,7 +55,6 @@
               <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="isLoading === 'success' ? '' : 'hidden'">Save</UButton>
             </form>
           </div>
-          <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
         </div>
       </div>
     </UContainer>
