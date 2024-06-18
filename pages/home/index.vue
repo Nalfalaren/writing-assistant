@@ -2,6 +2,7 @@
     <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : ''">
         <homepage-navigation_bar/>
         <homepage-grammar/>
+        <homepage-vertical_bar/>
     </div>
 </template>
 <script setup lang="js">
