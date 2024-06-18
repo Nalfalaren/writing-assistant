@@ -62,9 +62,8 @@
 
 <script setup lang="js">
 import { ref } from 'vue';
-import getTextCompletion from '~/composables/GetTextCompletion.js';
 import successMessage from '../alert/SuccessAlert';
-
+import getTextCompletion from '@/composables/GetTextCompletion'
 
 let rawText = ref('');
 let paragraph = ref('');

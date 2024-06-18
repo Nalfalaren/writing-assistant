@@ -1,8 +1,7 @@
-import successMessage from "~/components/alert/SuccessAlert";
 import failAlert from "~/components/alert/FailAlert";
 import axios from "axios";
 
-const getGrammarCheck = async (params) => {
+const getTextCompletion = async (params) => {
 
     try {
         const response = await axios.post(
@@ -20,4 +19,4 @@ const getGrammarCheck = async (params) => {
     }
 };
 
-export default getGrammarCheck;
+export default getTextCompletion;
