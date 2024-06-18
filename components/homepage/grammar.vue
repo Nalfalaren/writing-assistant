@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div class="flex flex-col justify-center items-center">
+    <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
+    <div>
     <UContainer>
       <div class="absolute top-[25%] left-[20%]">
         <div class="px-32">
-          <div class="relative aspect-video w-screen max-h-[800px]">
+          <div class="relative aspect-video w-full max-h-[800px]">
             <form
               @submit.prevent="handleSubmit"
               @keydown.enter.prevent="handleSubmit"
@@ -57,6 +59,7 @@
         </div>
       </div>
     </UContainer>
+    </div>
   </div>
 </template>
 
