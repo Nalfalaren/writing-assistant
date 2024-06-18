@@ -52,7 +52,7 @@
             </UTooltip>
             <UTooltip text="Your account">
               <div class="w-[50px] h-[50px]" v-show="image">
-                <img :src="image" alt="user_icon" class="w-full h-full object-cover rounded-full">
+                <img :src="avatar_img" alt="user_icon" class="w-full h-full object-cover rounded-full">
               </div>
             </UTooltip>
           </div>
@@ -112,15 +112,10 @@ import { ref } from 'vue';
 import { useScreen } from '~/store/userHome.js';
 import successMessage from '../alert/SuccessAlert.js';
 import getUserInfo from '~/composables/getUserInfo.js';
-
-let image = '';
+const avatar_img = ref('');
 const screen = useScreen();
-const getToken = async () => {
-  const avatar_url = getUserInfo();
-  image = decodeURIComponent(avatar_url);
-}
-
-getToken();
+  const userInfo = await getUserInfo();
+  avatar_img.value = userInfo.avatar_url;
 
 </script>
 

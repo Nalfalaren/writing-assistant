@@ -7,7 +7,7 @@
       >
         <div class="flex flex-col justify-between p-8">
           <div class="flex flex-col gap-[10px] text-2xl">
-            <h1 class="text-[#753fea]">Welcome <span class="font-bold">{{ userName }}</span></h1>
+            <h1 class="text-[#753fea]">Welcome <span class="font-bold">{{ name }}</span></h1>
             <div class="mt-[30px] mb-[10px] text-[#753fea]"><h1>Choose your function!</h1></div>
             <div
               class="flex flex-row items-center gap-[20px] text-2xl hover:font-semibold hover:bg-[#D9D9D9] p-4 hover:rounded-[10px] cursor-pointer text-[#753fea]"
@@ -52,9 +52,9 @@ import { useRouter } from 'vue-router';
 import getUserInfo from '~/composables/getUserInfo';
 const screen = useScreen();
 const router = useRouter();
-const userName = getUserInfo();
-console.log(userName);
-
+const name = ref('');
+const userName = await getUserInfo();
+name.value = userName.name;
 const handleClickFunction = (name) => {
   screen.isFunctionClicked = name;
   if(screen.isFunctionClicked === 'dashboard'){
