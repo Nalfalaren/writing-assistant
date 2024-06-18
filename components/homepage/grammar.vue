@@ -3,7 +3,7 @@
     <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
     <div>
     <UContainer>
-      <div class="absolute top-[25%] left-[20%] max-w-[1400px] h-screen">
+      <div class="absolute top-[25%] left-[20%] max-w-[1400px] h-[800px]">
         <div class="px-32">
           <div class="relative aspect-video w-full max-h-[800px]">
             <form
