@@ -87,7 +87,7 @@ const reset = () => {
   finalText.value = '';
   highlightedText.value = '';
   isLoading.value = 'pending';
-  appliedFixes.value.clear(); 
+  appliedFixes.value.clear(); // Clear the applied fixes set
   successMessage("Reset successfully");
 };
 
@@ -114,7 +114,6 @@ const handleSubmit = async () => {
       if (result.body.errors.length > 0) {
         data.value = result;
         highlightedText.value = generateHighlightedText();
-        console.log(finalText.value);
         isLoading.value = 'success';
       } else {
         isLoading.value = 'pending';
@@ -132,15 +131,21 @@ const applySuggestion = () => {
   const error = data.value.body.errors[currentErrorIndex.value];
   const errorWord = error.word;
   const suggestionWord = error.suggestion;
+
+  // Check if the error has already been fixed to prevent multiple corrections
   if (!appliedFixes.value.has(errorWord)) {
-    const regExp = new RegExp(`\\b${errorWord}\\b`, 'g'); 
+    const regExp = new RegExp(`\\b${errorWord}\\b`, 'g'); // Global flag added to replace all occurrences
     finalText.value = finalText.value.replace(regExp, suggestionWord);
+
+    // Mark this fix as applied
     appliedFixes.value.add(errorWord);
+    appliedFixes.value.add(suggestionWord); // To avoid circular fix
 
     showModal.value = false;
     successMessage('Fixed successfully!');
     highlightedText.value = generateHighlightedText();
   } else {
+    // If the word was already fixed, just close the modal
     showModal.value = false;
   }
 };
@@ -149,6 +154,7 @@ const generateHighlightedText = () => {
   let highlighted = finalText.value;
   data.value.body.errors.forEach((error, index) => {
     const errorWord = error.word;
+    // Highlight only if the error word is not in the applied fixes
     if (!appliedFixes.value.has(errorWord)) {
       const highlightedWord = `<span id="${index}" class="text-red-400 hover:font-bold underline cursor-pointer">${errorWord}</span>`;
       highlighted = highlighted.replace(new RegExp(`\\b${errorWord}\\b`, 'g'), highlightedWord);
