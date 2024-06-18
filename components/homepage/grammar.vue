@@ -1,10 +1,10 @@
 <template>
   <div>
     <UContainer>
+    <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
       <div class="absolute top-[25%] left-[20%]">
         <div class="px-32">
-          <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
-          <div class="relative aspect-video w-[1400px] h-[800px]">
+          <div class="relative aspect-video w-screen max-h-[800px]">
             <form
               @submit.prevent="handleSubmit"
               @keydown.enter.prevent="handleSubmit"
