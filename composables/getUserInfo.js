@@ -3,18 +3,11 @@ import failAlert from "~/components/alert/FailAlert";
 import axios from "axios";
 
 const getUserInfo = async () => {
-    const url = `https://writing-assistant-app.onrender.com/api/user`;
+    const url = `https://writing-assistant-app.onrender.com/api/auth/user`;
     
     try {
-        const response = await axios.post(
-            url,
-            {},
-            {
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                withCredentials: true
-            }
+        const response = await axios.get(
+            url
         );
         console.log(response.data.body);
         return response.data.body;
