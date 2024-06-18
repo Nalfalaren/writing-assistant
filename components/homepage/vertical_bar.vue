@@ -49,11 +49,11 @@
 <script setup lang="js">
 import { useScreen } from '~/store/userHome';
 import { useRouter } from 'vue-router';
+import getUserInfo from '~/composables/getUserInfo';
 const screen = useScreen();
 const router = useRouter();
-const userName = ref('');
-
-userName.value = useCookie('name', 'get');
+const userName = getUserInfo();
+console.log(userName);
 
 const handleClickFunction = (name) => {
   screen.isFunctionClicked = name;
@@ -67,7 +67,6 @@ const handleClickFunction = (name) => {
 
  const handleSignOut = async () => {
   router.push('/login');
-  await deleteCookie();
  }
 
 </script>

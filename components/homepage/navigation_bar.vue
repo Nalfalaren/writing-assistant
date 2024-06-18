@@ -111,22 +111,16 @@
 import { ref } from 'vue';
 import { useScreen } from '~/store/userHome.js';
 import successMessage from '../alert/SuccessAlert.js';
+import getUserInfo from '~/composables/getUserInfo.js';
 
 let image = '';
 const screen = useScreen();
-const access_token = ref('');
-const router = useRouter();
 const getToken = async () => {
-  const avatar_url = useCookie('avatar_img', 'get').value;
+  const avatar_url = getUserInfo();
   image = decodeURIComponent(avatar_url);
 }
 
-  access_token.value = useCookie('access-token', 'get');
-  
-  if(access_token){
-   await getToken();
-  }
-
+getToken();
 
 </script>
 
