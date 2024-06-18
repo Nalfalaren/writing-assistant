@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="absolute top-[10%] left-[30%]">
     <UHorizontalNavigation
       :links="links"
-      class="border-b border-[#c1b6fc] dark:border-[#5424b3] absolute w-1/2 bg-[#f4f3ff] rounded-[20px] flex flex-row justify-center items-center gap-[20px]"
+      class="border-b border-[#c1b6fc] dark:border-[#5424b3] w-1/2 bg-[#f4f3ff] rounded-[20px] flex flex-row justify-center items-center gap-[20px]"
     >
       <template #default="{ link }">
         <div class="relative group">
