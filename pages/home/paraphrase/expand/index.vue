@@ -16,7 +16,7 @@ useSeoMeta({
 })
 const router = useRouter();
 const access_token = useCookie('access-token', 'get');
-if(!access_token.value){
-    router.push('/login')
-}
+// if(!access_token.value){
+//     router.push('/login')
+// }
 </script>
