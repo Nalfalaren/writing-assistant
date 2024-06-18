@@ -1,5 +1,6 @@
 <template>
   <div class="relative flex flex-col justify-center items-center">
+    <homepage-vertical_bar/>
     <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
     <div>
     <UContainer>
