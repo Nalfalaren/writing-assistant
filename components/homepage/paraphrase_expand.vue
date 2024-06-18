@@ -2,7 +2,7 @@
   <div class="flex flex-col justify-center">
     <homepage-small_nav/>
     <UContainer class="">
-      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3">
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3 mt-16">
         <div class="">
           <div class="relative aspect-video w-[1400px] h-[600px]">
             <form @submit.prevent="handleSubmit" @keydown.enter.prevent="handleSubmit">
