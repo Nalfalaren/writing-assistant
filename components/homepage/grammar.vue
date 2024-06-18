@@ -1,7 +1,6 @@
 <template>
   <div>
     <UContainer>
-    <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
       <div class="absolute top-[25%] left-[20%]">
         <div class="px-32">
           <div class="relative aspect-video w-screen max-h-[800px]">

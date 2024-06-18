@@ -1,6 +1,7 @@
 <template>
     <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : ''">
         <homepage-navigation_bar/>
+        <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'"/>
         <homepage-vertical_bar/>
         <homepage-grammar/>
     </div>
