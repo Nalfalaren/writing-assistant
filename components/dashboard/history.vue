@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[30%] flex flex-col">
+    <div class="absolute top-[25%] left-1/2 transform -translate-x-1/2 -translate-y-[30%] flex flex-col">
         <UContainer>
           <h1 class="text-3xl font-bold mb-[20px] text-[#753fea]">Dashboard</h1>
                 <div v-for="(history, index) in paginatedHistory" :key="index" class="mb-[20px]">

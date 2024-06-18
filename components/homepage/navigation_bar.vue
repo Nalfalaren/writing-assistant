@@ -50,11 +50,6 @@
                 ></UIcon>
               </div>
             </UTooltip>
-            <UTooltip text="Your account">
-              <div class="w-[50px] h-[50px]" v-show="image">
-                <img :src="avatar_img" alt="user_icon" class="w-full h-full object-cover rounded-full">
-              </div>
-            </UTooltip>
           </div>
         </div>
       </UCard>
@@ -112,11 +107,6 @@ import { ref } from 'vue';
 import { useScreen } from '~/store/userHome.js';
 import successMessage from '../alert/SuccessAlert.js';
 import getUserInfo from '~/composables/getUserInfo.js';
-const avatar_img = ref('');
-const screen = useScreen();
-  const userInfo = await getUserInfo();
-  avatar_img.value = userInfo.avatar_url;
-
 </script>
 
 
