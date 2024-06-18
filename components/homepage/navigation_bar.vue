@@ -119,7 +119,6 @@ const router = useRouter();
 const getToken = async () => {
   const avatar_url = useCookie('avatar_img', 'get').value;
   image = decodeURIComponent(avatar_url);
-  successMessage("Login successfully")
 }
 
   access_token.value = useCookie('access-token', 'get');

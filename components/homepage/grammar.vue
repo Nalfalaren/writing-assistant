@@ -73,6 +73,7 @@ const currentErrorIndex = ref(-1);
 const data = ref({ body: { errors: [] } });
 const highlightedText = ref('');
 const firstText = ref('');
+const appliedFixes = ref(new Set()); // Track applied fixes
 
 if (router.currentRoute.value.fullPath === '/') {
   signInDialog(router.push('/login'));
@@ -86,6 +87,7 @@ const reset = () => {
   finalText.value = '';
   highlightedText.value = '';
   isLoading.value = 'pending';
+  appliedFixes.value.clear(); 
   successMessage("Reset successfully");
 };
 
@@ -130,19 +132,24 @@ const applySuggestion = () => {
   const error = data.value.body.errors[currentErrorIndex.value];
   const errorWord = error.word;
   const suggestionWord = error.suggestion;
-  const regExp = new RegExp(`\\b${errorWord}\\b`, 'g'); // Global flag added to replace all occurrences
-  finalText.value = finalText.value.replace(regExp, suggestionWord);
+  if (!appliedFixes.value.has(errorWord)) {
+    const regExp = new RegExp(`\\b${errorWord}\\b`, 'g'); 
+    finalText.value = finalText.value.replace(regExp, suggestionWord);
+    appliedFixes.value.add(errorWord);
 
-  showModal.value = false;
-  successMessage('Fixed successfully!');
-  highlightedText.value = generateHighlightedText();
+    showModal.value = false;
+    successMessage('Fixed successfully!');
+    highlightedText.value = generateHighlightedText();
+  } else {
+    showModal.value = false;
+  }
 };
 
 const generateHighlightedText = () => {
   let highlighted = finalText.value;
   data.value.body.errors.forEach((error, index) => {
     const errorWord = error.word;
-    if (errorWord !== error.suggestion) {
+    if (!appliedFixes.value.has(errorWord)) {
       const highlightedWord = `<span id="${index}" class="text-red-400 hover:font-bold underline cursor-pointer">${errorWord}</span>`;
       highlighted = highlighted.replace(new RegExp(`\\b${errorWord}\\b`, 'g'), highlightedWord);
     }
