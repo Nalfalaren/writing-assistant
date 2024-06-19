@@ -73,7 +73,7 @@ const currentErrorIndex = ref(-1);
 const data = ref({ body: { errors: [] } });
 const highlightedText = ref('');
 const firstText = ref('');
-const appliedFixes = ref(new Set()); // Track applied fixes
+const appliedFixes = ref(new Set());
 
 if (router.currentRoute.value.fullPath === '/') {
   signInDialog(router.push('/login'));
@@ -87,7 +87,7 @@ const reset = () => {
   finalText.value = '';
   highlightedText.value = '';
   isLoading.value = 'pending';
-  appliedFixes.value.clear(); // Clear the applied fixes set
+  appliedFixes.value.clear(); 
   successMessage("Reset successfully");
 };
 
@@ -131,21 +131,16 @@ const applySuggestion = () => {
   const error = data.value.body.errors[currentErrorIndex.value];
   const errorWord = error.word;
   const suggestionWord = error.suggestion;
-
-  // Check if the error has already been fixed to prevent multiple corrections
   if (!appliedFixes.value.has(errorWord)) {
-    const regExp = new RegExp(`\\b${errorWord}\\b`, 'g'); // Global flag added to replace all occurrences
+    const regExp = new RegExp(`\\b${errorWord}\\b`, 'g'); 
     finalText.value = finalText.value.replace(regExp, suggestionWord);
-
-    // Mark this fix as applied
     appliedFixes.value.add(errorWord);
-    appliedFixes.value.add(suggestionWord); // To avoid circular fix
+    appliedFixes.value.add(suggestionWord); 
 
     showModal.value = false;
     successMessage('Fixed successfully!');
     highlightedText.value = generateHighlightedText();
   } else {
-    // If the word was already fixed, just close the modal
     showModal.value = false;
   }
 };
@@ -154,7 +149,6 @@ const generateHighlightedText = () => {
   let highlighted = finalText.value;
   data.value.body.errors.forEach((error, index) => {
     const errorWord = error.word;
-    // Highlight only if the error word is not in the applied fixes
     if (!appliedFixes.value.has(errorWord)) {
       const highlightedWord = `<span id="${index}" class="text-red-400 hover:font-bold underline cursor-pointer">${errorWord}</span>`;
       highlighted = highlighted.replace(new RegExp(`\\b${errorWord}\\b`, 'g'), highlightedWord);
