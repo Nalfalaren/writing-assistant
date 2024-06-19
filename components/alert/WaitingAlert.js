@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 const WaitingAlert = () => {
     Swal.fire({
-        title: "This process needs from 1 to 3 minutes!, please wait...",
+        title: "This process needs from 1 to 5 minutes!, please wait...",
         showClass: {
           popup: `
             animate__animated
