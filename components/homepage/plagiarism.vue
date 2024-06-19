@@ -37,7 +37,7 @@
                       </h1>
                     </div>
                     <div class="basis-[30%]">
-                      <h1 class="text-2xl">Similarity: <span :class="Math.round(+text.similarity) > 30 ? 'text-red-400 font-bold text-2xl' : 'text-green-400 text-2xl font-bold'">{{ +text.similarity }}%</span></h1>
+                      <h1 class="text-2xl">Similarity: <span :class="Math.round(+text.similarity) > 30 ? 'text-red-400 font-bold text-2xl' : 'text-green-400 text-2xl font-bold'">{{ (+text.similarity).toFixed(2) }}%</span></h1>
                       <template>
                         <UMeter :value="25" indicator label="Plagiarism rate" />
                       </template>
