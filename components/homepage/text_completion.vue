@@ -93,7 +93,7 @@
 <script setup lang="js">
 import { ref } from 'vue';
 import SuccessMessage from '../alert/SuccessAlert';
-import getTextCompletion from '~/composables/getTextCompletion';
+import GetTextCompletion from '~/composables/getTextCompletion';
 
 let rawText = ref('');
 let paraphrasedAnswer = ref('');
@@ -120,7 +120,7 @@ const reset = () => {
 const handleSubmit = async () => {
   try{
   isLoading.value = 'loading'
-  const data = await getTextCompletion(rawText.value);
+  const data = await GetTextCompletion(rawText.value);
   if(data){
   choices.value = await data;
   }
