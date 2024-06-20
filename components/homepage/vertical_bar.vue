@@ -49,12 +49,13 @@
 <script setup lang="js">
 import { useScreen } from '~/store/userHome';
 import { useRouter } from 'vue-router';
-import getUserInfo from '~/composables/getUserInfo';
+
 const screen = useScreen();
 const router = useRouter();
-const name = ref('');
 const userName = await getUserInfo();
+const name = ref('');
 name.value = userName.name;
+
 const handleClickFunction = (name) => {
   screen.isFunctionClicked = name;
   if(screen.isFunctionClicked === 'dashboard'){

@@ -21,7 +21,10 @@
                 rows="20"
               ></textarea>
               <div v-show="paraphrasedAnswer" class="mb-[30px]">
-                <h1 class="text-2xl">{{ rawText + " " }} <span class="font-bold">{{ paraphrasedAnswer }}</span></h1>
+                <h1 class="text-2xl">
+                  {{ rawText + " " }}
+                  <span class="font-bold">{{ paraphrasedAnswer }}</span>
+                </h1>
               </div>
               <div v-show="isLoading === 'loading'">
                 <img
@@ -31,27 +34,54 @@
                 />
               </div>
               <div v-show="isLoading === 'success'" class="">
-              <select
-                v-model="selectedChoice"
-                @change="handleAnswer" class="p-4 w-1/2 text-2xl truncate border border-2 border-solid border-gray-500"
-              >
-                <option disabled value="" class="h-[100px]">
-                  Choose your answer:
-                </option>
-                <option
-                  v-for="(choice, index) in choices"
-                  :value="choice"
-                  :key="index"
-                  class=""
+                <select
+                  v-model="selectedChoice"
+                  @change="handleAnswer"
+                  class="p-4 w-1/2 text-2xl truncate border border-2 border-solid border-gray-500"
                 >
-                  {{ choice }}
-                </option>
-              </select>
+                  <option disabled value="" class="h-[100px]">
+                    Choose your answer:
+                  </option>
+                  <option
+                    v-for="(choice, index) in choices"
+                    :value="choice"
+                    :key="index"
+                    class=""
+                  >
+                    {{ choice }}
+                  </option>
+                </select>
               </div>
-              <div class="mt-[100px]"><span class="text-2xl">Word count: {{ isLoading === 'success' ? paraphrasedAnswer.split(' ').length + rawText.split(' ').length : wordCount }}</span></div>
-              <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Reset</UButton>
-                <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
-                <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="paraphrasedAnswer ? '' : 'hidden'">Save</UButton>
+              <div class="mt-[100px]">
+                <span class="text-2xl"
+                  >Word count:
+                  {{
+                    isLoading === "success"
+                      ? paraphrasedAnswer.split(" ").length +
+                        rawText.split(" ").length
+                      : wordCount
+                  }}</span
+                >
+              </div>
+              <UButton
+                class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
+                @click="reset"
+                :class="isLoading === 'success' ? '' : 'hidden'"
+                >Reset</UButton
+              >
+              <UButton
+                type="submit"
+                class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
+                :disabled="isLoading !== 'pending'"
+                :class="isLoading === 'success' ? 'hidden' : ''"
+                >Submit</UButton
+              >
+              <UButton
+                @click="handleSave"
+                class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]"
+                :class="paraphrasedAnswer ? '' : 'hidden'"
+                >Save</UButton
+              >
             </form>
           </div>
         </div>
@@ -62,11 +92,10 @@
 
 <script setup lang="js">
 import { ref } from 'vue';
-import successMessage from '../alert/SuccessAlert';
-import getTextCompletion from '@/composables/GetTextCompletion'
+import SuccessMessage from '../alert/SuccessAlert';
+import getTextCompletion from '~/composables/getTextCompletion'
 
 let rawText = ref('');
-let paragraph = ref('');
 let paraphrasedAnswer = ref('');
 let choices = ref([]);
 let selectedChoice = ref('');
@@ -92,7 +121,6 @@ const handleSubmit = async () => {
   try{
   isLoading.value = 'loading'
   const data = await getTextCompletion(rawText.value);
-  console.log(data);
   if(data){
   choices.value = await data;
   }
@@ -119,13 +147,6 @@ const handleSave = async () => {
 watch(rawText, () => {
   console.log(`Word count: ${wordCount.value}`);
 });
-
-// const handleChoice = () => {
-//   applyChoice.value = true;
-//   if(applyChoice.value = true){
-//     selectedChoice.value = rawText + " " + selectedChoice.value
-//   } 
-// }
 
 </script>
 

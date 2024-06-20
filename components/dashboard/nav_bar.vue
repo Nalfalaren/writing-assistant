@@ -30,7 +30,6 @@
         </div>
             </div>
             <div class="flex flex-row items-center gap-[20px]">
-                <div class="w-[60px] h-[60px]"><nuxt-img :src="userImg" class="w-full h-full object-cover rounded-full"></nuxt-img></div>
                 <div><span class="text-xl font-bold text-[#753fea]">{{ userName }}</span></div>
             </div>
         </div>
@@ -41,8 +40,6 @@
 <script setup lang="js">
 import { useScreen } from '~/store/userHome.js'
 const screen = useScreen();
-const userName = useCookie('name', 'get');
-const userImg = useCookie('avatar_img', 'get');
 </script>
 <style lang="">
 </style>

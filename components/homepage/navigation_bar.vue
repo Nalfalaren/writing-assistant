@@ -106,7 +106,6 @@
 import { ref } from 'vue';
 import { useScreen } from '~/store/userHome.js';
 import successMessage from '../alert/SuccessAlert.js';
-import getUserInfo from '~/composables/getUserInfo.js';
 const screen = useScreen();
 </script>
 

@@ -16,7 +16,7 @@ const developer = {
     PORT: 6868
 }
 const production = {
-    CLIENT_ID: '405525693953-nev7rod0qb4bp0f4jifhgaeonf7cr6m3.apps.googleusercontent.com',
+    CLIENT_ID: '405525693953-aa8k0fp1bpb6h8he2hts4bcf6r7tndec.apps.googleusercontent.com',
     REDIRECT_URI: 'https://writing-assistant-app.onrender.com/api/auth/oauth/sign-in',
     RESPONSE_TYPE: 'code',
     scope: [
@@ -33,15 +33,9 @@ const production = {
     PORT: 6868
 }
 
-const test = {
-   
-
-}
-
 const configs = {
     DEV: developer,
     PRO: production,
-    TEST: test
 }
 
 const getConfigObject = (env) => {

@@ -1,5 +1,5 @@
 import axios from "axios";
-const saveChoice = (input, output, type) => {
+const SaveChoice = (input, output, type) => {
   try {
     console.log({ input: input, output: output, type: type });
     const response = axios.post(
@@ -10,11 +10,10 @@ const saveChoice = (input, output, type) => {
         withCredentials: true,
       }
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error.data.response);
   }
 };
 
-export default saveChoice;
+export default SaveChoice;

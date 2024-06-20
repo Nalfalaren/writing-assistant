@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-const failAlert = (title) => {
+const FailAlert = (title) => {
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -17,4 +17,4 @@ const failAlert = (title) => {
       });
 }
 
-export default failAlert;
+export default FailAlert;

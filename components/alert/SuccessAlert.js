@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-const successMessage = (message) => {
+const SuccessMessage = (message) => {
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -17,4 +17,4 @@ const successMessage = (message) => {
       });
 }
 
-export default successMessage
+export default SuccessMessage

@@ -1,10 +1,8 @@
 import successMessage from "~/components/alert/SuccessAlert";
-import failAlert from "~/components/alert/FailAlert";
+import FailAlert from "~/components/alert/FailAlert";
 import axios from "axios";
 
-const getParaphrase = async (type, params) => {
-    console.log(params);
-    console.log({text : params});
+const GetParaphrase = async (type, params) => {
     const url = `https://writing-assistant-app.onrender.com/api/assistant/paraphrase`;
     try {
         const response = await axios.post(
@@ -17,13 +15,12 @@ const getParaphrase = async (type, params) => {
                 withCredentials: true
             }
         );
-        console.log(response.data.body);
         return response.data.body.versions;
     } catch (error) {
         console.error(error);
-        failAlert("Please wait for a minute before trying again!");
+        FailAlert("Please wait for a minute before trying again!");
         throw error; 
     }
 };
 
-export default getParaphrase;
+export default GetParaphrase;

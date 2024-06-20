@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="js">
-import successMessage from '../alert/SuccessAlert';
+import SuccessMessage from '../alert/SuccessAlert';
 import WaitingAlert from '../alert/WaitingAlert';
 let rawText = ref('');
 const plagiarism = ref([]);
@@ -72,7 +72,7 @@ const handleSubmit = async () => {
       plagiarism.value = await getPlagiarism(rawText.value);
       if(plagiarism.value){
         isLoading.value = 'success';
-        successMessage("Check plagiarism successfully!")
+        SuccessMessage("Check plagiarism successfully!")
       } 
     }
     catch(error){
@@ -89,13 +89,13 @@ const handleSubmit = async () => {
     rawText.value = '';
     plagiarism.value = '',
     isLoading.value = 'pending'
-    successMessage("Reset successfully!")
+    SuccessMessage("Reset successfully!")
   }
 
   const handleSave = async () => {
   const saveData = await saveChoice(rawText.value, plagiarism.value, 'plagiarism-checking');
   if(saveData){
-    successMessage('Saved successfully!')
+    SuccessMessage('Saved successfully!')
   }
 }
 

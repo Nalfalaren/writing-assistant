@@ -25,7 +25,7 @@
               <div v-show="isLoading === 'success'" class="mt-[50px]">
                 <select v-model="selectedChoice" @change="handleAnswer" class="p-4 w-1/2 text-2xl truncate border border-2 border-solid border-gray-500 mt-[50px]">
                   <option disabled value="" class="h-[200px]">Choose your answer: </option>
-                  <option v-for="(choice, index) in paragraph" :value="choice" :key="index" class="truncate">
+                  <option v-for="(choice, index) in answerList" :value="choice" :key="index" class="truncate">
                     {{ choice }}
                   </option>
                 </select>
@@ -47,13 +47,13 @@
 
 <script setup lang="js">
 import getParaphrase from '~/composables/getParaphrase.js';
-import successMessage from '../alert/SuccessAlert';
+import SuccessMessage from '../alert/SuccessAlert';
 
 let rawText = ref('');
-let paragraph = ref([]);
 let isLoading = ref('pending');
 let paraphrasedAnswer = ref('');
 let selectedChoice = ref('');
+let answerList = ref([]);
 
 const wordCount = computed(() => {
   return rawText.value.split(/\s+/).filter(word => word.length > 0).length;
@@ -72,8 +72,8 @@ const reset = () => {
 const handleSubmit = async () => {
   try {
     isLoading.value = 'loading';
-    paragraph.value = await getParaphrase('shorten', rawText.value);
-    if (paragraph.value) {
+    answerList.value = await getParaphrase('shorten', rawText.value);
+    if (answerList.value) {
       isLoading.value = 'success';
     } 
   } catch (error) {
@@ -88,7 +88,7 @@ const handleSubmit = async () => {
 const handleSave = async () => {
   const saveData = await saveChoice(rawText.value, selectedChoice.value, 'paraphrase');
   if(saveData){
-    successMessage('Saved successfully!')
+    SuccessMessage('Saved successfully!')
   }
 }
 

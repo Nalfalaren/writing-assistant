@@ -1,7 +1,7 @@
-import failAlert from "~/components/alert/FailAlert";
+import FailAlert from "~/components/alert/FailAlert";
 import axios from "axios";
 
-const getTextCompletion = async (params) => {
+const GetTextCompletion = async (params) => {
 
     try {
         const response = await axios.post(
@@ -14,9 +14,9 @@ const getTextCompletion = async (params) => {
         return response.data.body.versions;
     } catch (error) {
         console.error(error.response);
-        failAlert("Please wait for a minute before trying again!");
+        FailAlert("Please wait for a minute before trying again!");
         throw error;
     }
 };
 
-export default getTextCompletion;
+export default GetTextCompletion;

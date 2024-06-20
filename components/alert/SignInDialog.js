@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-const signInDialog = (callback) => {
+const SignInDialog = (callback) => {
     Swal.fire({
         title: "You have to sign in before using our service",
         showDenyButton: true,
@@ -15,4 +15,4 @@ const signInDialog = (callback) => {
       }
 }
 
-export default signInDialog;
+export default SignInDialog;
