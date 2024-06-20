@@ -140,7 +140,7 @@ const handleSubmit = async () => {
 const handleSave = async () => {
   const saveData = await saveChoice(rawText.value, selectedChoice.value, 'text-completion');
   if(saveData){
-    successMessage('Saved successfully!')
+    SuccessMessage('Saved successfully!')
   }
 }
 
