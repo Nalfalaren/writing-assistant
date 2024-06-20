@@ -86,7 +86,7 @@ useSeoMeta({
 })
 
 const data = {
-  root: 'https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount',
+  root: 'https://accounts.google.com/o/oauth2/v2/auth',
   client_id: getConfigObject('PRO').CLIENT_ID,
   url: getConfigObject('PRO').REDIRECT_URI,
   status: getConfigObject('PRO').ACCESS_TYPE,
@@ -100,22 +100,21 @@ const data = {
   authFlow: getConfigObject('PRO').FLOWNAME,
 }
 const googleLoginUrl = `${data.root}?client_id=${data.client_id}&response_type=${data.respond_type}&access_type=${encodeURIComponent(data.status)}&redirect_uri=${encodeURIComponent(data.url)}&prompt=${encodeURIComponent(data.prompts)}&scope=${encodeURIComponent(data.scope)}&service=${data.service}&o2v=${data.o2v}&theme=${data.theme}&ddm=${data.o2v}&flowName=${data.authFlow}`;
-
 // const params = {
 //         client_id: '405525693953-aa8k0fp1bpb6h8he2hts4bcf6r7tndec.apps.googleusercontent.com',
 //         response_type: 'code',
 //         access_type: 'offline',
 //         redirect_uri: 'https://writing-assistant-app.onrender.com/api/auth/oauth/sign-in',
 //         prompt: "consent",
-//         scope: [
-//             'https://www.googleapis.com/auth/userinfo.profile',
-//             'https://www.googleapis.com/auth/userinfo.email'
-//         ].join(' ')
+        // scope: [
+        //     'https://www.googleapis.com/auth/userinfo.profile',
+        //     'https://www.googleapis.com/auth/userinfo.email'
+        // ].join(' ')
 //     }
 
-    // const searchParams = new URLSearchParams(params);
-    // const root = 'https://accounts.google.com/o/oauth2/v2/auth';
-    // const googleLoginUrl = `${root}?${searchParams.toString()}`
-    
+//     const searchParams = new URLSearchParams(params);
+//     const root = 'https://accounts.google.com/o/oauth2/v2/auth';
+//     const googleLoginUrl = `${root}?${searchParams.toString()}`
+//     console.log(googleLoginUrl);
 
 </script>

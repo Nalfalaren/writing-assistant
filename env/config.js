@@ -19,10 +19,10 @@ const production = {
     CLIENT_ID: '405525693953-aa8k0fp1bpb6h8he2hts4bcf6r7tndec.apps.googleusercontent.com',
     REDIRECT_URI: 'https://writing-assistant-app.onrender.com/api/auth/oauth/sign-in',
     RESPONSE_TYPE: 'code',
-    scope: [
-                    'https://www.googleapis.com/auth/userinfo.profile',
-                    'https://www.googleapis.com/auth/userinfo.email'
-                ].join(' '),
+    SCOPE: [
+        'https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/userinfo.email'
+    ].join(' '),
     ACCESS_TYPE: 'offline',
     PROMPT: 'consent',
     SERVICE: 'lso',
