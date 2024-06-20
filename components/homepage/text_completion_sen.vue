@@ -46,7 +46,7 @@
 
 <script setup lang="js">
 import { ref } from 'vue';
-import getTextCompletion from '~/composables/etTextCompletion';
+import getTextCompletion from '~/composables/GetTextCompletion';
 
 let rawText = '';
 let choices = ref([]);
