@@ -93,7 +93,7 @@
 <script setup lang="js">
 import { ref } from 'vue';
 import SuccessMessage from '../alert/SuccessAlert';
-import getTextCompletion from '~/composables/getTextCompletion'
+import getTextCompletion from '~/composables/getTextCompletion';
 
 let rawText = ref('');
 let paraphrasedAnswer = ref('');
