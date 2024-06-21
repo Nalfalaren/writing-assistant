@@ -2,7 +2,7 @@
   <div class="">
     <UHorizontalNavigation
       :links="links"
-      class="border-b border-[#c1b6fc] absolute top-[20%] left-[30%] w-1/2 bg-[#f4f3ff] rounded-[20px] flex flex-row justify-center items-center gap-[20px] dark:border-[#5424b3] rounded-[20px]"
+      class="border-b border-[#c1b6fc] absolute top-[20%] min-[1800px]:left-[40%] left-[30%] max-w-[800px] bg-[#f4f3ff] rounded-[20px] flex flex-row justify-center items-center gap-[20px] dark:border-[#5424b3] rounded-[20px]"
     >
       <template #default="{ link }">
         <div class="relative group">

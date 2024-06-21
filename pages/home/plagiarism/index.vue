@@ -1,5 +1,5 @@
 <template>
-    <div :class="screen.screenMode === 'dark' ? 'bg-gray-900 w-full h-full' : ''">
+    <div class="min-[1800px]:px-40">
         <homepage-navigation_bar/>
         <homepage-vertical_bar/>
         <homepage-plagiarism/>

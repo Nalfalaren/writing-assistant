@@ -3,9 +3,9 @@
     <homepage-small_nav v-if="$router.currentRoute.value.fullPath !== '/'" />
     <div>
       <UContainer>
-        <div class="absolute top-[25%] left-[25%] mt-[100px]">
+        <div class="absolute top-[25%] min-[1800px]:left-[40%] left-[25%] mt-20">
           <div>
-            <div class="relative aspect-video w-[1400px] h-[600px]">
+            <div class="relative aspect-video">
               <form
                 @submit.prevent="handleSubmit"
                 @keydown.enter.prevent="handleSubmit"
@@ -14,16 +14,17 @@
                   color="white"
                   variant="outline"
                   placeholder="Type something here..."
-                  class="w-full max-h-[400px] p-4 outline-none text-2xl resize-none"
+                  class="max-w-full max-h-[400px] p-4 outline-none text-xl resize-none"
                   v-model="currentText"
                   v-show="isLoading !== 'success'"
                   :disabled="isLoading === 'loading'"
-                  rows="20"
+                  :rows="20"
+                  :cols="100"
                 ></textarea>
                 <div
                   v-html="highlightedText"
                   v-show="isLoading === 'success'"
-                  class="text-2xl"
+                  class="text-xl"
                 ></div>
                 <div v-show="isLoading === 'loading'">
                   <img
@@ -58,20 +59,20 @@
                     </button>
                   </div>
                 </div>
-                <div class="mt-[100px]">
-                  <span class="text-2xl">Word count: {{ wordCount }}</span>
+                <div>
+                  <span class="text-xl">Word count: {{ wordCount }}</span>
                 </div>
                 <div class="flex flex-row justify-between items-center">
                   <UButton
                     type="submit"
-                    class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
+                    class="px-12 py-8 text-xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
                     :disabled="isLoading === 'loading'"
                     v-show="isLoading !== 'success'"
                   >
                     Submit
                   </UButton>
                   <UButton
-                    class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
+                    class="px-12 py-8 text-xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
                     v-show="isLoading === 'success'"
                     @click="reset"
                   >
@@ -79,7 +80,7 @@
                   </UButton>
                   <UButton
                     @click="handleSave"
-                    class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]"
+                    class="px-12 py-8 text-xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]"
                     :class="isLoading === 'success' ? '' : 'hidden'"
                   >
                     Save
@@ -147,7 +148,7 @@ const handleSubmit = async () => {
     if (result && result.body) {
       if (result.body.errors.length === 0 && result.body.originalText === result.body.fixedText) {
         isLoading.value = 'pending';
-        successMessage('No errors found!');
+        SuccessMessage('No errors found!');
         return;
       }
         data.value = result;

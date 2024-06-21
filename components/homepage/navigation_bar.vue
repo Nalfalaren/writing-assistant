@@ -10,7 +10,6 @@
       >
         <div class="flex flex-row justify-between items-center px-4">
           <div class="flex flex-row items-center gap-[20px]">
-            <!-- <h1 class="text-3xl text-[#0A2FB6] font-bold" @click="$router.push('/home')">Correctly</h1> -->
             <UTooltip text="Click on here to expand and narrow!">
               <UIcon
                 :name="
@@ -54,58 +53,12 @@
         </div>
       </UCard>
     </nav>
-    <!-- <USlideover v-model="isOpen" prevent-close>
-      <UCard
-        class="flex flex-col flex-1"
-        :ui="{
-          body: { base: 'flex-1' },
-          ring: '',
-          divide: 'divide-y divide-gray-100 dark:divide-gray-800',
-        }"
-      >
-        <template #header>
-          <div class="flex items-center justify-between">
-            <h3
-              class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
-            >
-              Choose the function!
-            </h3>
-            <UButton
-              color="gray"
-              variant="ghost"
-              icon="i-heroicons-x-mark-20-solid"
-              class="-my-1"
-              @click="isOpen = false"
-            />
-          </div>
-        </template>
-        <div>
-          <ul class="flex flex-col justify-between gap-[30px] text-2xl">
-            <li class="hover:bg-gray-300 py-2">
-              <ULink to="/">Grammar</ULink>
-            </li>
-            <li class="hover:bg-gray-300 py-2">
-              <ULink to="/plagiarism">Plagiarism check</ULink>
-            </li>
-            <li class="hover:bg-gray-300 py-2">
-              <ULink to="/completion">Text completion</ULink>
-            </li>
-            <li class="hover:bg-gray-300 py-2">
-              <ULink to="/paraphrase">Paraphrase</ULink>
-            </li>
-          </ul>
-        </div>
-
-        <Placeholder class="h-full" />
-      </UCard>
-    </USlideover> -->
   </div>
 </template>
 
 <script setup lang="js">
 import { ref } from 'vue';
 import { useScreen } from '~/store/userHome.js';
-import successMessage from '../alert/SuccessAlert.js';
 const screen = useScreen();
 </script>
 

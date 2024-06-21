@@ -6,20 +6,21 @@
         class="absolute top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/3 mt-8"
       >
         <div class="">
-          <div class="relative aspect-video w-[1400px] h-[600px]">
+          <div class="relative aspect-video">
             <form
               @submit.prevent="handleSubmit"
               @keydown.enter.prevent="handleSubmit"
             >
-              <textarea
+            <textarea
                 color="white"
                 variant="outline"
                 placeholder="Type something here..."
-                class="w-full max-h-[400px] p-4 outline-none text-2xl resize-none"
+                class="max-w-full max-h-[400px] p-4 outline-none text-xl resize-none"
                 v-model="rawText"
                 v-show="isLoading !== 'success'"
                 :disabled="isLoading === 'loading'"
                 rows="20"
+                cols="100"
               ></textarea>
               <div v-show="isLoading === 'loading'">
                 <img
@@ -45,9 +46,9 @@
                   </div>
                 </div>
               </div>
-              <UButton type="submit" class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
-              <UButton class="px-16 py-8 text-2xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Reset</UButton>
-              <UButton @click="handleSave" class="px-16 py-8 text-2xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="isLoading === 'success' ? '' : 'hidden'">Save</UButton>
+              <UButton type="submit" class="px-12 py-8 text-xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" :disabled="isLoading !== 'pending'" :class="isLoading === 'success' ? 'hidden' : ''">Submit</UButton>
+              <UButton class="px-12 py-8 text-xl font-bold absolute bottom-2 right-2 bg-[#753fea] hover:bg-[#5424b3]" @click="reset" :class="isLoading === 'success' ? '' : 'hidden'">Reset</UButton>
+              <UButton @click="handleSave" class="px-12 py-8 text-xl font-bold absolute bottom-2 left-2 bg-[#753fea] hover:bg-[#5424b3]" :class="isLoading === 'success' ? '' : 'hidden'">Save</UButton>
             </form>
           </div>
         </div>
